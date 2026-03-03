@@ -3,368 +3,596 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Seguridad Social en España - FP Superior 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Seguridad Social — IPE I · CIFP Cerdeño</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
 <style>
-:root{
-  --bg:#f5f5f7;--surface:#fff;--surface2:#fafafa;
-  --border:#e5e5ea;--border2:#d1d1d6;
-  --text:#1d1d1f;--text2:#6e6e73;--text3:#aeaeb2;
-  --accent:#0071e3;--accent2:#0077ed;--accent-soft:rgba(0,113,227,0.08);
-  --green:#34c759;--green-soft:rgba(52,199,89,0.08);--green-border:rgba(52,199,89,0.2);
-  --amber:#ff9f0a;--amber-soft:rgba(255,159,10,0.08);--amber-border:rgba(255,159,10,0.2);
-  --red:#ff3b30;
-  --radius:16px;--radius-sm:12px;--radius-xs:8px;
-  --shadow:0 1px 2px rgba(0,0,0,0.04),0 2px 8px rgba(0,0,0,0.04);
-  --font:'DM Sans',system-ui,-apple-system,sans-serif;
-  --mono:'JetBrains Mono','SF Mono',Menlo,monospace;
+:root {
+  --cream: #f5f0e8; --white: #fdfcf9;
+  --terracotta: #c0533a; --terracotta-light: #e8d5cf; --terracotta-dark: #8f3726;
+  --slate: #2d3f50; --slate-light: #d6e2ea;
+  --gold: #c8973a; --gold-light: #f0e4c8;
+  --green: #3a7d5a; --green-light: #d0eadb;
+  --text: #1e2a35; --muted: #7a8b96; --border: #ddd5c8; --radius: 12px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-::selection{background:var(--accent-soft);color:var(--accent)}
-input[type=number]{-moz-appearance:textfield}
-input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)}}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--cream); color: var(--text); min-height: 100vh;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0,0,0,0.018) 24px, rgba(0,0,0,0.018) 25px);
+  pointer-events: none; z-index: 0;
+}
+/* ── NAV ── */
+nav {
+  position: relative; z-index: 10; background: var(--white);
+  border-bottom: 1px solid var(--border); padding: 16px 40px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--slate); display: flex; align-items: center; gap: 10px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); }
+.nav-back { font-size: 13px; color: var(--muted); border: 1px solid var(--border); padding: 5px 14px; border-radius: 100px; background: var(--cream); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: all .15s; }
+.nav-back:hover { color: var(--text); border-color: var(--text); }
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1; background: var(--slate);
+  padding: 72px 40px 64px; overflow: hidden;
+  animation: fadeUp .5s ease both;
+}
+.hero::after {
+  content: 'SS'; position: absolute; right: 40px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif; font-size: 280px; font-weight: 800;
+  font-style: italic; color: rgba(255,255,255,0.04);
+  pointer-events: none; line-height: 1; user-select: none;
+}
+.hero-inner { max-width: 880px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-label {
+  display: inline-block; background: var(--gold); color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; padding: 5px 14px; border-radius: 4px; margin-bottom: 24px;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(34px, 5vw, 62px); font-weight: 800; line-height: 1.05;
+  color: var(--white); margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,.6); font-weight: 300; max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+/* ── TABS ── */
+.tabs-bar {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--white); border-bottom: 1px solid var(--border);
+  padding: 0 40px; display: flex; gap: 0;
+}
+.tab-btn {
+  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 16px 22px; border: none; background: transparent; cursor: pointer;
+  color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color .15s, border-color .15s; display: flex; align-items: center; gap: 8px;
+  letter-spacing: .01em;
+}
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-btn:hover:not(.active) { color: var(--text); }
+/* ── MAIN ── */
+main { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 52px 40px 100px; animation: fadeUp .5s .15s ease both; }
+/* eyebrow */
+.eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--terracotta);
+  display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+}
+.eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* section pills */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.pill {
+  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 7px 16px; border-radius: 100px;
+  border: 1px solid var(--border); background: var(--white);
+  color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap;
+}
+.pill.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+.pill:hover:not(.active) { border-color: var(--text); color: var(--text); }
+/* theory card */
+.theory-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  animation: fadeUp .35s ease both;
+}
+.theory-card-head {
+  display: flex; align-items: center; gap: 16px;
+  padding: 28px 32px; border-bottom: 1px solid var(--border);
+  background: var(--cream);
+}
+.theory-icon { font-size: 32px; }
+.theory-card-head h2 {
+  font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 800;
+  color: var(--slate); line-height: 1.1;
+}
+.theory-card-head .unit-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); margin-top: 4px;
+}
+.theory-body { padding: 32px; }
+/* content blocks */
+.block-text { font-size: 15px; line-height: 1.85; color: var(--text); margin: 8px 0; font-weight: 400; }
+.block-sub {
+  font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
+  color: var(--slate); margin: 28px 0 8px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.block-tip {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--green-light); border: 1px solid #a8d5be;
+  border-radius: 8px; padding: 14px 18px; margin: 14px 0;
+  font-size: 14px; line-height: 1.7; color: #1e4a32;
+}
+.block-formula {
+  display: flex; gap: 12px; align-items: flex-start;
+  background: var(--gold-light); border: 1px solid #e0c87a;
+  border-radius: 8px; padding: 14px 18px; margin: 12px 0;
+  font-size: 13.5px; font-family: 'Lato', monospace; color: #5c3d0a; line-height: 1.7;
+}
+.block-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+.tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+thead th {
+  padding: 11px 18px; text-align: left; font-size: 11px; font-weight: 700;
+  letter-spacing: .6px; text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid var(--border); background: var(--cream);
+}
+tbody td { padding: 12px 18px; border-bottom: 1px solid var(--border); line-height: 1.55; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: var(--cream); }
+/* ── CALC ── */
+.calc-intro { margin-bottom: 32px; }
+.calc-intro p { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+.calc-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; margin-bottom: 20px;
+}
+.calc-head {
+  padding: 22px 28px; display: flex; align-items: center; gap: 14px;
+  border-bottom: 1px solid var(--border); background: var(--cream);
+}
+.calc-icon { font-size: 26px; flex-shrink: 0; }
+.calc-head-info { flex: 1; }
+.calc-head-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--slate); }
+.calc-head-desc { font-size: 13px; color: var(--muted); margin-top: 3px; font-weight: 300; }
+.calc-badge {
+  font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+  background: var(--gold-light); color: #7a5a18; border: 1px solid #e0c87a; flex-shrink: 0;
+}
+.calc-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 14px; padding: 22px 28px; border-bottom: 1px solid var(--border); }
+.calc-label { font-size: 11px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 7px; }
+.calc-input {
+  width: 100%; padding: 11px 14px; border-radius: 8px;
+  border: 1.5px solid var(--border); background: var(--cream);
+  color: var(--text); font-size: 16px; font-family: 'Lato', sans-serif; font-weight: 700;
+  outline: none; transition: border-color .15s;
+}
+.calc-input:focus { border-color: var(--gold); background: var(--white); }
+.calc-btn-wrap { padding: 16px 28px; }
+.calc-btn {
+  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700;
+  padding: 13px 0; width: 100%; border: none; border-radius: 8px;
+  background: var(--gold); color: #fff; cursor: pointer; transition: background .15s;
+  letter-spacing: .02em;
+}
+.calc-btn:hover { background: #a97a20; }
+.calc-results { padding: 0 28px 28px; border-top: 1px solid var(--border); padding-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+.step {
+  padding: 14px 18px; border-radius: 8px; background: var(--cream);
+  border-left: 3px solid var(--border);
+  animation: fadeUp .25s ease both;
+}
+.step.hl { background: var(--gold-light); border-left-color: var(--gold); }
+.step-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 5px; }
+.step.hl .step-label { color: var(--gold); }
+.step-val { font-size: 14px; font-family: 'Lato', monospace; color: var(--text); line-height: 1.6; }
+.step-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+/* ── QUIZ ── */
+.quiz-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; }
+.quiz-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.quiz-counter { font-size: 12px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); }
+.quiz-score { font-size: 12px; font-weight: 700; color: var(--gold); background: var(--gold-light); border: 1px solid #e0c87a; padding: 3px 12px; border-radius: 100px; }
+.quiz-progress { height: 3px; background: var(--terracotta-light); border-radius: 99px; margin-bottom: 28px; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: var(--terracotta); border-radius: 99px; transition: width .4s cubic-bezier(.4,0,.2,1); }
+.quiz-q { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 22px; color: var(--slate); }
+.quiz-options { display: flex; flex-direction: column; gap: 9px; }
+.quiz-opt {
+  display: flex; align-items: center; gap: 12px; padding: 13px 16px;
+  border-radius: 8px; border: 1.5px solid var(--border); background: var(--cream);
+  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 400; color: var(--text);
+  cursor: pointer; text-align: left; width: 100%; transition: all .15s; line-height: 1.5;
+}
+.quiz-opt:hover:not(:disabled) { border-color: var(--slate); background: var(--white); }
+.quiz-opt.correct { background: var(--green-light); border-color: var(--green); color: #1e4a32; }
+.quiz-opt.wrong { background: var(--terracotta-light); border-color: var(--terracotta); color: var(--terracotta-dark); }
+.quiz-letter {
+  width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; background: var(--white);
+  border: 1px solid var(--border); color: var(--muted); transition: all .15s;
+}
+.quiz-opt.correct .quiz-letter { background: var(--green); border-color: var(--green); color: #fff; }
+.quiz-opt.wrong   .quiz-letter { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
+.quiz-next {
+  margin-top: 18px; width: 100%; padding: 13px; border: none; border-radius: 8px;
+  background: var(--terracotta); color: #fff; font-family: 'Lato', sans-serif;
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: background .15s;
+}
+.quiz-next:hover { background: var(--terracotta-dark); }
+/* end screen */
+.quiz-end { text-align: center; padding: 32px 16px; animation: scaleIn .4s ease both; }
+.quiz-end-emoji { font-size: 60px; margin-bottom: 8px; }
+.quiz-end-pct { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 800; line-height: 1; }
+.quiz-end-label { font-size: 16px; color: var(--muted); margin-top: 8px; font-weight: 300; }
+.quiz-end-msg { font-size: 14px; color: var(--muted); margin: 18px auto 32px; max-width: 280px; line-height: 1.65; font-weight: 300; }
+/* footer */
+footer {
+  position: relative; z-index: 1;
+  background: var(--white); border-top: 1px solid var(--border);
+  padding: 22px 40px; display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted);
+}
+footer strong { color: var(--text); font-weight: 700; }
+@media(max-width:600px) {
+  nav, .hero, main, footer { padding-left: 20px; padding-right: 20px; }
+  .tabs-bar { padding: 0 20px; }
+  .theory-body, .calc-inputs, .calc-btn-wrap, .calc-results { padding-left: 20px; padding-right: 20px; }
+  .theory-card-head { padding: 20px; }
+}
+@keyframes fadeUp  { from { opacity:0; transform:translateY(12px) } to { opacity:1; transform:translateY(0) } }
+@keyframes scaleIn { from { opacity:0; transform:scale(.96) } to { opacity:1; transform:scale(1) } }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const {useState,useEffect,useRef}=React;
+const {useState} = React;
 
+/* ─── DATA ─── */
 const THEORY=[
-  {id:"bases",title:"Bases y BR",icon:"\u{1F4CA}",content:[
-    {t:"sub",v:"\u00bfQu\u00e9 es la Base de Cotizaci\u00f3n (BC)?"},
-    {t:"text",v:"Es la cantidad sobre la que se aplican los porcentajes de cotizaci\u00f3n para calcular lo que paga la empresa y el trabajador a la Seguridad Social cada mes. Se calcula a partir de la retribuci\u00f3n mensual bruta del trabajador, incluyendo salario base, complementos salariales, pagas extra prorrateadas y, en su caso, horas extraordinarias."},
+  {id:"bases",title:"Bases y Base Reguladora",icon:"📊",content:[
+    {t:"sub",v:"¿Qué es la Base de Cotización (BC)?"},
+    {t:"text",v:"Es la cantidad sobre la que se aplican los porcentajes de cotización para calcular lo que paga la empresa y el trabajador a la Seguridad Social cada mes. Se calcula a partir de la retribución mensual bruta del trabajador, incluyendo salario base, complementos salariales, pagas extra prorrateadas y, en su caso, horas extraordinarias."},
     {t:"formula",v:"BC mensual = Salario base + Complementos + Prorrata pagas extra"},
-    {t:"tip",v:"La BC tiene topes: una base m\u00ednima y una base m\u00e1xima que fija el Gobierno cada a\u00f1o. En 2026, la base m\u00e1xima del R\u00e9gimen General es de 4.720,50 \u20ac/mes."},
-    {t:"sub",v:"Tipos de Base de Cotizaci\u00f3n"},
-    {t:"table",h:["Tipo","\u00bfQu\u00e9 incluye?","\u00bfPara qu\u00e9 se usa?"],r:[
-      ["BCCC (Contingencias Comunes)","Salario base + complementos + prorrata pagas extra (SIN horas extra)","Cotizaciones por CC, y la BR de IT por enfermedad com\u00fan, nacimiento, jubilaci\u00f3n..."],
-      ["BCCP (Contingencias Profesionales)","Todo lo anterior + horas extraordinarias","Cotizaciones por AT/EP, desempleo, FOGASA, FP, y la BR de IT por AT/EP y desempleo"],
+    {t:"tip",v:"La BC tiene topes: una base mínima y una base máxima que fija el Gobierno cada año. En 2026, la base máxima del Régimen General es de 4.720,50 €/mes."},
+    {t:"sub",v:"Tipos de Base de Cotización"},
+    {t:"table",h:["Tipo","¿Qué incluye?","¿Para qué se usa?"],r:[
+      ["BCCC (Conting. Comunes)","Salario base + complementos + prorrata pagas extra (SIN horas extra)","Cotizaciones por CC, y la BR de IT por enf. común, nacimiento, jubilación…"],
+      ["BCCP (Conting. Profesionales)","Todo lo anterior + horas extraordinarias","Cotizaciones por AT/EP, desempleo, FOGASA, FP, y la BR de IT por AT/EP y desempleo"],
     ]},
-    {t:"tip",v:"Diferencia clave: las horas extraordinarias NO se incluyen en la BCCC pero S\u00cd en la BCCP."},
-    {t:"sub",v:"Ejemplo num\u00e9rico: BCCC vs BCCP"},
-    {t:"text",v:"Imagina a Pablo, t\u00e9cnico de imagen diagn\u00f3stica. Su n\u00f3mina mensual es: salario base 1.200 \u20ac, complemento de turnicidad 200 \u20ac, prorrata de pagas extra 233,33 \u20ac y horas extra ese mes 150 \u20ac."},
-    {t:"formula",v:"BCCC = 1.200 + 200 + 233,33 = 1.633,33 \u20ac (sin horas extra)"},
-    {t:"formula",v:"BCCP = 1.200 + 200 + 233,33 + 150 = 1.783,33 \u20ac (con horas extra)"},
-    {t:"text",v:"Si Pablo coge una gripe (contingencia com\u00fan), su BR diaria se calcula con la BCCC: 1.633,33 \u00f7 30 = 54,44 \u20ac/d\u00eda. Si en cambio sufre un accidente de trabajo, se usa la BCCP: 1.783,33 \u00f7 30 = 59,44 \u20ac/d\u00eda (m\u00e1s el promedio de horas extra del a\u00f1o anterior \u00f7 365). Por eso importa distinguirlas: la base que se usa determina cu\u00e1nto cobrar\u00e1s."},
-    {t:"tip",v:"\u00bfPor qu\u00e9 las horas extra van aparte? Porque son irregulares. Para contingencias comunes se busca una base estable (salario habitual). Para contingencias profesionales se incluye todo, porque un AT puede ocurrir precisamente haciendo horas extra."},
-    {t:"sub",v:"\u00bfQu\u00e9 es la Base Reguladora (BR)?"},
-    {t:"text",v:"Es la cantidad que se usa para calcular la cuant\u00eda de una prestaci\u00f3n (lo que cobrar\u00e1s estando de baja, de desempleo, de jubilaci\u00f3n, etc.). Se obtiene a partir de las bases de cotizaci\u00f3n, pero la f\u00f3rmula var\u00eda seg\u00fan la prestaci\u00f3n."},
-    {t:"sub",v:"BC vs BR"},
-    {t:"table",h:["Concepto","Base de Cotizaci\u00f3n","Base Reguladora"],r:[
-      ["\u00bfQu\u00e9 es?","Cantidad sobre la que se cotiza cada mes","Cantidad sobre la que se calcula la prestaci\u00f3n"],
-      ["\u00bfCu\u00e1ndo se usa?","Cada mes, para calcular cotizaciones","Cuando nace el derecho a una prestaci\u00f3n"],
-      ["\u00bfQui\u00e9n la determina?","Se deriva del salario bruto del trabajador","Se calcula con f\u00f3rmulas espec\u00edficas seg\u00fan la prestaci\u00f3n"],
-      ["Ejemplo","T\u00e9cnico cobra 1.800 \u20ac brutos/mes \u2192 su BCCC es 1.800 \u20ac","Si coge una gripe, su BR diaria = 1.800 \u00f7 30 = 60 \u20ac/d\u00eda"],
+    {t:"tip",v:"Diferencia clave: las horas extraordinarias NO se incluyen en la BCCC pero SÍ en la BCCP."},
+    {t:"sub",v:"Ejemplo numérico"},
+    {t:"text",v:"Pablo, técnico de imagen diagnóstica: salario base 1.200 €, complemento turnicidad 200 €, prorrata pagas 233,33 €, horas extra 150 €."},
+    {t:"formula",v:"BCCC = 1.200 + 200 + 233,33 = 1.633,33 € (sin horas extra)"},
+    {t:"formula",v:"BCCP = 1.200 + 200 + 233,33 + 150 = 1.783,33 € (con horas extra)"},
+    {t:"tip",v:"¿Por qué las horas extra van aparte? Porque son irregulares. Para contingencias comunes se busca una base estable. Para profesionales se incluye todo, porque un AT puede ocurrir precisamente haciendo horas extra."},
+    {t:"sub",v:"¿Qué es la Base Reguladora (BR)?"},
+    {t:"text",v:"Es la cantidad sobre la que se calcula la cuantía de una prestación (baja, desempleo, jubilación…). Se obtiene a partir de las BC, pero la fórmula varía según la prestación."},
+    {t:"table",h:["Concepto","Base de Cotización","Base Reguladora"],r:[
+      ["¿Qué es?","Cantidad sobre la que se cotiza cada mes","Cantidad sobre la que se calcula la prestación"],
+      ["¿Cuándo se usa?","Cada mes, para calcular cotizaciones","Cuando nace el derecho a una prestación"],
+      ["¿Quién la determina?","Se deriva del salario bruto","Se calcula con fórmulas específicas por prestación"],
+      ["Ejemplo","Técnico cobra 1.800 € → BCCC = 1.800 €","Gripe → BR diaria = 1.800 ÷ 30 = 60 €/día"],
     ]},
-    {t:"sub",v:"F\u00f3rmulas de BR por prestaci\u00f3n"},
-    {t:"table",h:["Prestaci\u00f3n","F\u00f3rmula de la BR","Base usada"],r:[
-      ["IT (enf. com\u00fan)","BCCC mes anterior \u00f7 30","BCCC"],
-      ["IT (AT/EP)","(BCCP mes anterior \u00f7 30) + (H. extra a\u00f1o \u00f7 365)","BCCP"],
-      ["Nacimiento","BCCC mes anterior \u00f7 30","BCCC"],
-      ["Desempleo","Suma BCCP \u00faltimos 180 d\u00edas \u00f7 180","BCCP"],
-      ["Jubilaci\u00f3n","Media BCCC \u00faltimos 25 a\u00f1os (\u00f7 350)","BCCC"],
+    {t:"sub",v:"Fórmulas de BR por prestación"},
+    {t:"table",h:["Prestación","Fórmula","Base"],r:[
+      ["IT (enf. común)","BCCC mes anterior ÷ 30","BCCC"],
+      ["IT (AT/EP)","(BCCP mes anterior ÷ 30) + (H. extra año ÷ 365)","BCCP"],
+      ["Nacimiento","BCCC mes anterior ÷ 30","BCCC"],
+      ["Desempleo","Suma BCCP últimos 180 días ÷ 180","BCCP"],
+      ["Jubilación","Media BCCC últimos 25 años (÷ 350)","BCCC"],
     ]},
-    {t:"tip",v:"Truco para recordar: la BC es lo que PAGAS (cotizaciones), la BR es lo que COBRAS (prestaciones). La BC alimenta la BR."},
+    {t:"tip",v:"Truco: la BC es lo que PAGAS (cotizaciones), la BR es lo que COBRAS (prestaciones). La BC alimenta la BR."},
   ]},
-  {id:"regimenes",title:"Reg\u00edmenes",icon:"\u{1F3DB}\uFE0F",content:[
+  {id:"regimenes",title:"Regímenes",icon:"🏛️",content:[
     {t:"text",v:"El sistema se articula en dos grandes bloques:"},
-    {t:"table",h:["R\u00e9gimen","\u00bfA qui\u00e9n incluye?","Ejemplos"],r:[["R\u00e9gimen General","Trabajadores por cuenta ajena","T\u00e9cnico de radioterapia en hospital, administrativos..."],["Reg\u00edmenes Especiales","Actividades con caracter\u00edsticas especiales","Aut\u00f3nomos (RETA), Trabajadores del Mar, Miner\u00eda del Carb\u00f3n..."]]},
-    {t:"tip",v:"Como t\u00e9cnico/a sanitario/a en un hospital estar\u00e1s en el R\u00e9gimen General. Si abres tu propia cl\u00ednica, en el RETA (aut\u00f3nomos)."},
+    {t:"table",h:["Régimen","¿A quién incluye?","Ejemplos"],r:[
+      ["Régimen General","Trabajadores por cuenta ajena","Técnico de radioterapia en hospital, administrativos…"],
+      ["Regímenes Especiales","Actividades con características especiales","Autónomos (RETA), Trabajadores del Mar, Minería del Carbón…"],
+    ]},
+    {t:"tip",v:"Como técnico/a sanitario/a en un hospital estarás en el Régimen General. Si abres tu propia clínica, en el RETA (autónomos)."},
   ]},
-  {id:"entidades",title:"Entidades Gestoras",icon:"\u{1F3E2}",content:[
-    {t:"table",h:["Entidad","Funci\u00f3n principal"],r:[["INSS","Prestaciones econ\u00f3micas contributivas: IT, jubilaci\u00f3n, viudedad, orfandad, nacimiento..."],["INGESA","Servicios sanitarios en Ceuta y Melilla"],["IMSERSO","Prestaciones para mayores y personas con discapacidad"],["ISM","Prestaciones de trabajadores del mar"],["SEPE","Desempleo, formaci\u00f3n e intermediaci\u00f3n laboral"],["INSST","Asesoramiento en prevenci\u00f3n de riesgos laborales"]]},
+  {id:"entidades",title:"Entidades Gestoras",icon:"🏢",content:[
+    {t:"table",h:["Entidad","Función principal"],r:[
+      ["INSS","Prestaciones económicas contributivas: IT, jubilación, viudedad, orfandad, nacimiento…"],
+      ["INGESA","Servicios sanitarios en Ceuta y Melilla"],
+      ["IMSERSO","Prestaciones para mayores y personas con discapacidad"],
+      ["ISM","Prestaciones de trabajadores del mar"],
+      ["SEPE","Desempleo, formación e intermediación laboral"],
+      ["INSST","Asesoramiento en prevención de riesgos laborales"],
+    ]},
     {t:"tip",v:"Las Mutuas Colaboradoras gestionan AT/EP e IT. Cada empresa elige su Mutua al inscribirse."},
   ]},
-  {id:"obligaciones",title:"Obligaciones Empresa",icon:"\u{1F4CB}",content:[
-    {t:"sub",v:"1. Inscripci\u00f3n"},
-    {t:"text",v:"La empresa solicita inscripci\u00f3n ante la TGSS y recibe un CCC (C\u00f3digo de Cuenta de Cotizaci\u00f3n) de 11 cifras. Necesita un CCC por cada provincia donde tenga centro de trabajo."},
-    {t:"sub",v:"2. Afiliaci\u00f3n, Alta y Baja"},
-    {t:"table",h:["Acto","Descripci\u00f3n","Plazo"],r:[["Afiliaci\u00f3n","Una sola vez en la vida. Se asigna NAF.","Antes de la 1\u00aa relaci\u00f3n laboral"],["Alta","Cada nueva relaci\u00f3n laboral","Antes de comenzar (hasta 60 d\u00edas antes)"],["Baja","Al finalizar la relaci\u00f3n laboral","3 d\u00edas naturales"]]},
-    {t:"tip",v:"Si el empresario no da el alta \u2192 \u00abalta presunta\u00bb: el trabajador mantiene derechos pero el empresario responde directamente."},
-    {t:"sub",v:"3. Cotizaci\u00f3n \u2014 R\u00e9gimen General 2026"},
-    {t:"table",h:["Concepto","Empresa","Trabajador","Total"],r:[["Contingencias comunes","23,60%","4,70%","28,30%"],["Desempleo (indefinido)","5,50%","1,55%","7,05%"],["Desempleo (temporal)","6,70%","1,60%","8,30%"],["FOGASA","0,20%","\u2014","0,20%"],["Formaci\u00f3n profesional","0,60%","0,10%","0,70%"],["MEI","0,75%","0,15%","0,90%"]]},
-    {t:"tip",v:"La empresa paga aprox. 30-32 % y el trabajador 6,35-6,45 %. La empresa paga unas 5 veces m\u00e1s."},
+  {id:"obligaciones",title:"Obligaciones Empresa",icon:"📋",content:[
+    {t:"sub",v:"1. Inscripción"},
+    {t:"text",v:"La empresa solicita inscripción ante la TGSS y recibe un CCC (Código de Cuenta de Cotización) de 11 cifras. Necesita un CCC por cada provincia donde tenga centro de trabajo."},
+    {t:"sub",v:"2. Afiliación, Alta y Baja"},
+    {t:"table",h:["Acto","Descripción","Plazo"],r:[
+      ["Afiliación","Una sola vez en la vida. Se asigna NAF.","Antes de la 1ª relación laboral"],
+      ["Alta","Cada nueva relación laboral","Antes de comenzar (hasta 60 días antes)"],
+      ["Baja","Al finalizar la relación laboral","3 días naturales"],
+    ]},
+    {t:"tip",v:"Si el empresario no da el alta → «alta presunta»: el trabajador mantiene derechos pero el empresario responde directamente."},
+    {t:"sub",v:"3. Cotización — Régimen General 2026"},
+    {t:"table",h:["Concepto","Empresa","Trabajador","Total"],r:[
+      ["Contingencias comunes","23,60 %","4,70 %","28,30 %"],
+      ["Desempleo (indefinido)","5,50 %","1,55 %","7,05 %"],
+      ["Desempleo (temporal)","6,70 %","1,60 %","8,30 %"],
+      ["FOGASA","0,20 %","—","0,20 %"],
+      ["Formación profesional","0,60 %","0,10 %","0,70 %"],
+      ["MEI","0,75 %","0,15 %","0,90 %"],
+    ]},
+    {t:"tip",v:"La empresa paga aprox. 30–32 % y el trabajador 6,35–6,45 %. La empresa paga unas 5 veces más."},
   ]},
-  {id:"autonomos",title:"Aut\u00f3nomos",icon:"\u{1F4BC}",content:[
-    {t:"text",v:"Los aut\u00f3nomos (RETA) cotizan seg\u00fan rendimientos netos reales."},
-    {t:"table",h:["Concepto","Tipo","Cobertura"],r:[["Contingencias comunes","28,30%","Jubilaci\u00f3n, IT, IP, muerte y supervivencia"],["Contingencias profesionales","1,30%","AT y EP"],["Cese de actividad","0,90%","Equivalente a desempleo"],["Formaci\u00f3n profesional","0,10%","Formaci\u00f3n continua"],["MEI","0,90%","Sostenibilidad pensiones"]]},
+  {id:"autonomos",title:"Autónomos",icon:"💼",content:[
+    {t:"text",v:"Los autónomos (RETA) cotizan según rendimientos netos reales."},
+    {t:"table",h:["Concepto","Tipo","Cobertura"],r:[
+      ["Contingencias comunes","28,30 %","Jubilación, IT, IP, muerte y supervivencia"],
+      ["Contingencias profesionales","1,30 %","AT y EP"],
+      ["Cese de actividad","0,90 %","Equivalente a desempleo"],
+      ["Formación profesional","0,10 %","Formación continua"],
+      ["MEI","0,90 %","Sostenibilidad pensiones"],
+    ]},
     {t:"sub",v:"Tarifa plana 2026"},
-    {t:"text",v:"80 \u20ac/mes (\u2248 88,64 \u20ac con MEI) durante 12 meses. Prorrogable 12 meses m\u00e1s si rendimientos < SMI. J\u00f3venes (mujeres < 35, hombres < 30): bonificaci\u00f3n 30 % adicional. Municipios rurales (< 5.000 hab.): hasta 36 meses."},
+    {t:"text",v:"80 €/mes (≈ 88,64 € con MEI) durante 12 meses. Prorrogable 12 meses más si rendimientos < SMI. Jóvenes (mujeres < 35, hombres < 30): bonificación 30 % adicional. Municipios rurales (< 5.000 hab.): hasta 36 meses."},
   ]},
-  {id:"it",title:"Incapacidad Temporal",icon:"\u{1FA7A}",content:[
-    {t:"text",v:"Situaci\u00f3n en la que un trabajador temporalmente no puede trabajar y necesita asistencia sanitaria."},
+  {id:"it",title:"Incapacidad Temporal",icon:"🩺",content:[
+    {t:"text",v:"Situación en la que un trabajador temporalmente no puede trabajar y necesita asistencia sanitaria."},
     {t:"sub",v:"Requisitos"},
-    {t:"text",v:"Afiliado y en alta. Enfermedad com\u00fan: 180 d\u00edas cotizados en los \u00faltimos 5 a\u00f1os. AT, EP o accidente no laboral: no se exige per\u00edodo previo."},
-    {t:"sub",v:"Duraci\u00f3n: m\u00e1x. 12 meses + 6 de pr\u00f3rroga"},
-    {t:"sub",v:"Enfermedad com\u00fan / Acc. no laboral"},
-    {t:"table",h:["D\u00edas","% de la BR","\u00bfQui\u00e9n paga?"],r:[["D\u00edas 1-3","0 % (no se cobra)","Nadie"],["D\u00edas 4-15","60 %","Empresario"],["D\u00edas 16-20","60 %","INSS / Mutua"],["D\u00eda 21 en adelante","75 %","INSS / Mutua"]]},
+    {t:"text",v:"Afiliado y en alta. Enfermedad común: 180 días cotizados en los últimos 5 años. AT, EP o accidente no laboral: no se exige período previo."},
+    {t:"sub",v:"Duración: máx. 12 meses + 6 de prórroga"},
+    {t:"sub",v:"Enfermedad común / Acc. no laboral"},
+    {t:"table",h:["Días","% de la BR","¿Quién paga?"],r:[
+      ["Días 1-3","0 % (no se cobra)","Nadie"],
+      ["Días 4-15","60 %","Empresario"],
+      ["Días 16-20","60 %","INSS / Mutua"],
+      ["Día 21 en adelante","75 %","INSS / Mutua"],
+    ]},
     {t:"sub",v:"AT / EP"},
-    {t:"table",h:["D\u00edas","% de la BR","\u00bfQui\u00e9n paga?"],r:[["D\u00eda de la baja","Salario \u00edntegro","Empresario"],["D\u00eda siguiente en adelante","75 %","Mutua / INSS"]]},
-    {t:"sub",v:"C\u00e1lculo de la BR diaria"},
-    {t:"formula",v:"Enf. com\u00fan \u2192 BR = Base CC mes anterior \u00f7 30"},
-    {t:"formula",v:"AT/EP \u2192 BR = (BCCP mes anterior \u00f7 30) + (H. extra a\u00f1o anterior \u00f7 365)"},
+    {t:"table",h:["Días","% de la BR","¿Quién paga?"],r:[
+      ["Día de la baja","Salario íntegro","Empresario"],
+      ["Día siguiente en adelante","75 %","Mutua / INSS"],
+    ]},
+    {t:"sub",v:"Cálculo de la BR diaria"},
+    {t:"formula",v:"Enf. común → BR = Base CC mes anterior ÷ 30"},
+    {t:"formula",v:"AT/EP → BR = (BCCP mes anterior ÷ 30) + (H. extra año anterior ÷ 365)"},
   ]},
-  {id:"nacimiento",title:"Nacimiento",icon:"\u{1F476}",content:[
-    {t:"text",v:"Prestaci\u00f3n por suspensi\u00f3n del contrato: maternidad biol\u00f3gica, adopci\u00f3n o acogimiento."},
+  {id:"nacimiento",title:"Nacimiento",icon:"👶",content:[
+    {t:"text",v:"Prestación por suspensión del contrato: maternidad biológica, adopción o acogimiento."},
     {t:"sub",v:"16 semanas por progenitor (individual e intransferible)"},
     {t:"text",v:"6 primeras obligatorias e ininterrumpidas. 10 restantes a tiempo completo o parcial. +2 semanas por cada hijo a partir del segundo."},
-    {t:"sub",v:"Carencia seg\u00fan edad"},
-    {t:"table",h:["Edad","Cotizaci\u00f3n m\u00ednima"],r:[["< 21 a\u00f1os","No se exige"],["21-26 a\u00f1os","90 d. en \u00faltimos 7 a\u00f1os o 180 d. en toda la vida"],["> 26 a\u00f1os","180 d. en \u00faltimos 7 a\u00f1os o 360 d. en toda la vida"]]},
-    {t:"tip",v:"Cuant\u00eda: 100 % de la BR = Base CC mes anterior \u00f7 30."},
+    {t:"sub",v:"Carencia según edad"},
+    {t:"table",h:["Edad","Cotización mínima"],r:[
+      ["< 21 años","No se exige"],
+      ["21-26 años","90 d. en últimos 7 años o 180 d. en toda la vida"],
+      ["> 26 años","180 d. en últimos 7 años o 360 d. en toda la vida"],
+    ]},
+    {t:"tip",v:"Cuantía: 100 % de la BR = Base CC mes anterior ÷ 30."},
   ]},
-  {id:"ip",title:"Incapacidad Permanente",icon:"\u267F",content:[
-    {t:"table",h:["Grado","Definici\u00f3n","Cuant\u00eda"],r:[["IP Parcial","\u2265 33 % disminuci\u00f3n en profesi\u00f3n habitual","24 mensualidades de la BR"],["IP Total","No puede ejercer su profesi\u00f3n habitual","55 % BR (75 % si \u2265 55 sin empleo)"],["IP Absoluta","Incapaz para cualquier profesi\u00f3n","100 % de la BR"],["Gran Invalidez","Necesita asistencia para actos esenciales","100 % BR + complemento"]]},
-    {t:"sub",v:"Carencia (enfermedad com\u00fan)"},
-    {t:"text",v:"IP Parcial: 1.800 d\u00edas en \u00faltimos 10 a\u00f1os. IP Total/Absoluta/GI: < 31 a\u00f1os \u2192 1/3 desde los 16. \u2265 31 a\u00f1os \u2192 1/4 desde los 20 (m\u00edn. 5 a\u00f1os), con 1/5 en \u00faltimos 10 a\u00f1os."},
-    {t:"tip",v:"Si la causa es AT, EP o accidente no laboral \u2192 NO se exige cotizaci\u00f3n previa."},
+  {id:"ip",title:"Incapacidad Permanente",icon:"♿",content:[
+    {t:"table",h:["Grado","Definición","Cuantía"],r:[
+      ["IP Parcial","≥ 33 % disminución en profesión habitual","24 mensualidades de la BR"],
+      ["IP Total","No puede ejercer su profesión habitual","55 % BR (75 % si ≥ 55 sin empleo)"],
+      ["IP Absoluta","Incapaz para cualquier profesión","100 % de la BR"],
+      ["Gran Invalidez","Necesita asistencia para actos esenciales","100 % BR + complemento"],
+    ]},
+    {t:"sub",v:"Carencia (enfermedad común)"},
+    {t:"text",v:"IP Parcial: 1.800 días en últimos 10 años. IP Total/Absoluta/GI: < 31 años → 1/3 desde los 16. ≥ 31 años → 1/4 desde los 20 (mín. 5 años), con 1/5 en últimos 10 años."},
+    {t:"tip",v:"Si la causa es AT, EP o accidente no laboral → NO se exige cotización previa."},
   ]},
-  {id:"jubilacion",title:"Jubilaci\u00f3n",icon:"\u2600\uFE0F",content:[
+  {id:"jubilacion",title:"Jubilación",icon:"☀️",content:[
     {t:"sub",v:"Requisitos 2026"},
-    {t:"text",v:"Edad: 66 a\u00f1os y 8 meses (general), o 65 a\u00f1os con \u2265 38 a\u00f1os y 3 meses cotizados. Cotizaci\u00f3n m\u00ednima: 15 a\u00f1os (2 en los \u00faltimos 15). Cese de actividad."},
-    {t:"sub",v:"C\u00e1lculo de la BR (sistema dual 2026-2040)"},
-    {t:"formula",v:"F\u00f3rmula A \u2192 BR = Bases de 300 meses (25 a\u00f1os) anteriores \u00f7 350"},
-    {t:"formula",v:"F\u00f3rmula B \u2192 BR = 302 bases m\u00e1s altas de \u00faltimos 304 meses \u00f7 352,33"},
-    {t:"text",v:"Se aplica la m\u00e1s beneficiosa. \u00daltimos 24 meses a valor nominal, anteriores con IPC. Porcentaje: 50 % (15 a\u00f1os) \u2192 100 % (36 a\u00f1os y 6 meses)."},
-    {t:"tip",v:"Complemento brecha de g\u00e9nero 2026: 36,96 \u20ac/mes por hijo/a."},
+    {t:"text",v:"Edad: 66 años y 8 meses (general), o 65 años con ≥ 38 años y 3 meses cotizados. Cotización mínima: 15 años (2 en los últimos 15). Cese de actividad."},
+    {t:"sub",v:"Cálculo de la BR (sistema dual 2026–2040)"},
+    {t:"formula",v:"Fórmula A → BR = Bases de 300 meses (25 años) anteriores ÷ 350"},
+    {t:"formula",v:"Fórmula B → BR = 302 bases más altas de últimos 304 meses ÷ 352,33"},
+    {t:"text",v:"Se aplica la más beneficiosa. Últimos 24 meses a valor nominal, anteriores con IPC. Porcentaje: 50 % (15 años) → 100 % (36 años y 6 meses)."},
+    {t:"tip",v:"Complemento brecha de género 2026: 36,96 €/mes por hijo/a."},
   ]},
-  {id:"desempleo",title:"Desempleo",icon:"\u{1F4C9}",content:[
+  {id:"desempleo",title:"Desempleo",icon:"📉",content:[
     {t:"sub",v:"Requisitos"},
-    {t:"text",v:"Afiliado y en alta. \u2265 360 d\u00edas cotizados en \u00faltimos 6 a\u00f1os. No haber alcanzado edad de jubilaci\u00f3n. Situaci\u00f3n legal de desempleo (NO dimisi\u00f3n)."},
-    {t:"sub",v:"Cuant\u00eda"},
-    {t:"table",h:["Per\u00edodo","Cuant\u00eda"],r:[["Primeros 180 d\u00edas","70 % de la BR"],["Desde el d\u00eda 181","50 % de la BR"]]},
-    {t:"formula",v:"BR = Suma bases CP \u00faltimos 180 d\u00edas \u00f7 180"},
-    {t:"sub",v:"Duraci\u00f3n seg\u00fan cotizaci\u00f3n"},
-    {t:"table",h:["D\u00edas cotizados","D\u00edas de prestaci\u00f3n"],r:[["360-539","120"],["540-719","180"],["720-899","210"],["900-1.079","240"],["1.080-1.259","300"],["1.260-1.439","330"],["1.440-1.619","360"],["1.620-1.799","420"],["1.800-1.979","480"],["1.980-2.159","540"],["2.160 +","720"]]},
-    {t:"tip",v:"Plazo para solicitar: 15 d\u00edas h\u00e1biles. Capitalizaci\u00f3n (pago \u00fanico): \u2265 3 meses pendientes, no usado en 4 a\u00f1os, solicitar antes de iniciar actividad como aut\u00f3nomo."},
+    {t:"text",v:"Afiliado y en alta. ≥ 360 días cotizados en últimos 6 años. No haber alcanzado edad de jubilación. Situación legal de desempleo (NO dimisión)."},
+    {t:"sub",v:"Cuantía"},
+    {t:"table",h:["Período","Cuantía"],r:[
+      ["Primeros 180 días","70 % de la BR"],
+      ["Desde el día 181","50 % de la BR"],
+    ]},
+    {t:"formula",v:"BR = Suma bases CP últimos 180 días ÷ 180"},
+    {t:"sub",v:"Duración según cotización"},
+    {t:"table",h:["Días cotizados","Días de prestación"],r:[
+      ["360-539","120"],["540-719","180"],["720-899","210"],["900-1.079","240"],
+      ["1.080-1.259","300"],["1.260-1.439","330"],["1.440-1.619","360"],
+      ["1.620-1.799","420"],["1.800-1.979","480"],["1.980-2.159","540"],["2.160 +","720"],
+    ]},
+    {t:"tip",v:"Plazo para solicitar: 15 días hábiles. Capitalización (pago único): ≥ 3 meses pendientes, no usado en 4 años, solicitar antes de iniciar actividad como autónomo."},
   ]},
 ];
 
 const EXERCISES=[
-  {id:"it_comun",title:"IT \u00b7 Enfermedad Com\u00fan",icon:"\u{1FA7A}",tag:"Medio",tagColor:"#ea580c",
-    desc:"Calcula paso a paso lo que cobra un trabajador de baja por enfermedad com\u00fan.",
-    inputs:[{id:"baseCC",label:"Base CC mes anterior (\u20ac)",def:1800,min:900,max:5000},{id:"dias",label:"D\u00edas de baja",def:18,min:1,max:545}],
-    solve:function(v){var br=v.baseCC/30,d=v.dias,d1=Math.min(d,3),d2=Math.max(0,Math.min(d,15)-3),d3=Math.max(0,Math.min(d,20)-15),d4=Math.max(0,d-20),t2=d2*br*.6,t3=d3*br*.6,t4=d4*br*.75,tot=t2+t3+t4;
-      var s=[{l:"Base reguladora diaria",f:v.baseCC+" \u00f7 30 = "+br.toFixed(2)+" \u20ac/d\u00eda"},{l:"D\u00edas 1-3 ("+d1+" d.)",f:"0 % \u2192 0,00 \u20ac",d:"No paga nadie"},{l:"D\u00edas 4-15 ("+d2+" d.)",f:"60 % \u00d7 "+br.toFixed(2)+" = "+(br*.6).toFixed(2)+" \u20ac/d\u00eda \u00d7 "+d2+" = "+t2.toFixed(2)+" \u20ac",d:"Paga: Empresario"},{l:"D\u00edas 16-20 ("+d3+" d.)",f:"60 % \u00d7 "+br.toFixed(2)+" = "+(br*.6).toFixed(2)+" \u20ac/d\u00eda \u00d7 "+d3+" = "+t3.toFixed(2)+" \u20ac",d:"Paga: INSS / Mutua"}];
-      if(d4>0)s.push({l:"D\u00edas 21+ ("+d4+" d.)",f:"75 % \u00d7 "+br.toFixed(2)+" = "+(br*.75).toFixed(2)+" \u20ac/d\u00eda \u00d7 "+d4+" = "+t4.toFixed(2)+" \u20ac",d:"Paga: INSS / Mutua"});
-      s.push({l:"Total cobrado",f:tot.toFixed(2)+" \u20ac",hl:true});return s;}},
-  {id:"it_at",title:"IT \u00b7 Accidente de Trabajo",icon:"\u26A0\uFE0F",tag:"Medio",tagColor:"#ea580c",
+  {id:"it_comun",title:"IT · Enfermedad Común",icon:"🩺",tag:"Nivel medio",
+    desc:"Calcula paso a paso lo que cobra un trabajador de baja por enfermedad común.",
+    inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"dias",label:"Días de baja",def:18,min:1,max:545}],
+    solve(v){const br=v.baseCC/30,d=v.dias,d2=Math.max(0,Math.min(d,15)-3),d3=Math.max(0,Math.min(d,20)-15),d4=Math.max(0,d-20),t2=d2*br*.6,t3=d3*br*.6,t4=d4*br*.75,tot=t2+t3+t4;
+      const s=[{l:"Base reguladora diaria",f:`${v.baseCC} ÷ 30 = ${br.toFixed(2)} €/día`},{l:`Días 1-3 (${Math.min(d,3)} d.)`,f:"0 % → 0,00 €",d:"No paga nadie"},{l:`Días 4-15 (${d2} d.)`,f:`60 % × ${br.toFixed(2)} = ${(br*.6).toFixed(2)} €/día × ${d2} = ${t2.toFixed(2)} €`,d:"Paga: Empresario"},{l:`Días 16-20 (${d3} d.)`,f:`60 % × ${br.toFixed(2)} = ${(br*.6).toFixed(2)} €/día × ${d3} = ${t3.toFixed(2)} €`,d:"Paga: INSS / Mutua"}];
+      if(d4>0)s.push({l:`Días 21+ (${d4} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${d4} = ${t4.toFixed(2)} €`,d:"Paga: INSS / Mutua"});
+      s.push({l:"Total cobrado",f:`${tot.toFixed(2)} €`,hl:true});return s;}},
+  {id:"it_at",title:"IT · Accidente de Trabajo",icon:"⚠️",tag:"Nivel medio",
     desc:"Calcula lo que cobra un trabajador tras un accidente laboral.",
-    inputs:[{id:"baseCPP",label:"Base CP mes anterior (\u20ac)",def:2100,min:900,max:5000},{id:"he",label:"Horas extra a\u00f1o anterior (\u20ac)",def:0,min:0,max:10000},{id:"dias",label:"D\u00edas de baja",def:10,min:1,max:545}],
-    solve:function(v){var brB=v.baseCPP/30,brH=v.he/365,br=brB+brH,r=Math.max(0,v.dias-1),resto=r*br*.75;
-      var s=[{l:"BR diaria (base)",f:v.baseCPP+" \u00f7 30 = "+brB.toFixed(2)+" \u20ac/d\u00eda"}];
-      if(v.he>0)s.push({l:"BR (horas extra)",f:v.he+" \u00f7 365 = "+brH.toFixed(2)+" \u20ac/d\u00eda"});
-      s.push({l:"BR diaria total",f:br.toFixed(2)+" \u20ac/d\u00eda"},{l:"D\u00eda 1 (baja)",f:"Salario \u00edntegro = "+br.toFixed(2)+" \u20ac",d:"Paga: Empresario"},{l:"D\u00edas 2-"+v.dias+" ("+r+" d.)",f:"75 % \u00d7 "+br.toFixed(2)+" = "+(br*.75).toFixed(2)+" \u20ac/d\u00eda \u00d7 "+r+" = "+resto.toFixed(2)+" \u20ac",d:"Paga: Mutua / INSS"},{l:"Total cobrado",f:(br+resto).toFixed(2)+" \u20ac",hl:true});return s;}},
-  {id:"desempleo",title:"Desempleo",icon:"\u{1F4C9}",tag:"Alto",tagColor:"#dc2626",
-    desc:"Calcula duraci\u00f3n y cuant\u00eda de la prestaci\u00f3n por desempleo.",
-    inputs:[{id:"dc",label:"D\u00edas cotizados (\u00faltimos 6 a\u00f1os)",def:5110,min:360,max:8000},{id:"bcp",label:"Base CP media mensual (\u20ac)",def:2000,min:900,max:5000}],
-    solve:function(v){var t=[[360,539,120],[540,719,180],[720,899,210],[900,1079,240],[1080,1259,300],[1260,1439,330],[1440,1619,360],[1620,1799,420],[1800,1979,480],[1980,2159,540],[2160,1e9,720]];
-      var dur=0;for(var i=0;i<t.length;i++){if(v.dc>=t[i][0]&&v.dc<=t[i][1]){dur=t[i][2];break;}}
-      var brD=v.bcp*6/180,p1=v.bcp*.7,p2=v.bcp*.5,dR=Math.max(0,dur-180);
-      var s=[{l:"\u00bfTiene derecho?",f:v.dc+" d\u00edas \u2265 360 \u2192 S\u00ed \u2713"},{l:"Duraci\u00f3n",f:v.dc+" d\u00edas cotizados \u2192 "+dur+" d\u00edas de prestaci\u00f3n"},{l:"BR",f:v.bcp+" \u00d7 6 \u00f7 180 = "+brD.toFixed(2)+" \u20ac/d\u00eda \u2248 "+v.bcp.toFixed(2)+" \u20ac/mes"},{l:"Primeros 180 d\u00edas",f:"70 % \u00d7 "+v.bcp.toFixed(2)+" = "+p1.toFixed(2)+" \u20ac/mes"}];
-      if(dR>0)s.push({l:"Desde d\u00eda 181 ("+dR+" d.)",f:"50 % \u00d7 "+v.bcp.toFixed(2)+" = "+p2.toFixed(2)+" \u20ac/mes"});
-      s.push({l:"Resumen",f:dur+" d\u00edas \u2014 180 d. a "+p1.toFixed(2)+" \u20ac/mes"+(dR>0?", resto a "+p2.toFixed(2)+" \u20ac/mes":""),hl:true});return s;}},
-  {id:"nacimiento",title:"Nacimiento y Cuidado",icon:"\u{1F476}",tag:"Bajo",tagColor:"#059669",
-    desc:"Calcula la prestaci\u00f3n por nacimiento y cuidado del menor.",
-    inputs:[{id:"baseCC",label:"Base CC mes anterior (\u20ac)",def:1800,min:900,max:5000},{id:"edad",label:"Edad del progenitor/a",def:30,min:16,max:65},{id:"dc7",label:"D\u00edas cotizados \u00faltimos 7 a\u00f1os",def:2100,min:0,max:6000},{id:"dcT",label:"D\u00edas cotizados totales",def:2100,min:0,max:15000}],
-    solve:function(v){var br=v.baseCC/30,ok=false,txt="";
-      if(v.edad<21){ok=true;txt="< 21 a\u00f1os \u2192 No se exige";}else if(v.edad<=26){ok=v.dc7>=90||v.dcT>=180;txt="21-26 a\u00f1os \u2192 90 d./7 a\u00f1os ("+v.dc7+") o 180 d. total ("+v.dcT+")";}else{ok=v.dc7>=180||v.dcT>=360;txt="> 26 a\u00f1os \u2192 180 d./7 a\u00f1os ("+v.dc7+") o 360 d. total ("+v.dcT+")";}
-      return [{l:"Carencia",f:txt+" \u2192 "+(ok?"Cumple \u2713":"No cumple \u2717")},{l:"BR diaria",f:v.baseCC+" \u00f7 30 = "+br.toFixed(2)+" \u20ac/d\u00eda"},{l:"Cuant\u00eda",f:"100 % de la BR = "+br.toFixed(2)+" \u20ac/d\u00eda \u2248 "+v.baseCC.toFixed(2)+" \u20ac/mes"},{l:"Duraci\u00f3n",f:"16 semanas (6 obligatorias + 10 flexibles)"},{l:"Total estimado",f:br.toFixed(2)+" \u00d7 112 d\u00edas = "+(br*112).toFixed(2)+" \u20ac",hl:true}];}},
+    inputs:[{id:"baseCPP",label:"Base CP mes anterior (€)",def:2100,min:900,max:5000},{id:"he",label:"Horas extra año anterior (€)",def:0,min:0,max:10000},{id:"dias",label:"Días de baja",def:10,min:1,max:545}],
+    solve(v){const brB=v.baseCPP/30,brH=v.he/365,br=brB+brH,r=Math.max(0,v.dias-1),resto=r*br*.75;
+      const s=[{l:"BR diaria (base)",f:`${v.baseCPP} ÷ 30 = ${brB.toFixed(2)} €/día`}];
+      if(v.he>0)s.push({l:"BR (horas extra)",f:`${v.he} ÷ 365 = ${brH.toFixed(2)} €/día`});
+      s.push({l:"BR diaria total",f:`${br.toFixed(2)} €/día`},{l:"Día 1 (baja)",f:`Salario íntegro = ${br.toFixed(2)} €`,d:"Paga: Empresario"},{l:`Días 2-${v.dias} (${r} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${r} = ${resto.toFixed(2)} €`,d:"Paga: Mutua / INSS"},{l:"Total cobrado",f:`${(br+resto).toFixed(2)} €`,hl:true});return s;}},
+  {id:"desempleo",title:"Desempleo",icon:"📉",tag:"Nivel alto",
+    desc:"Calcula duración y cuantía de la prestación por desempleo.",
+    inputs:[{id:"dc",label:"Días cotizados (últimos 6 años)",def:5110,min:360,max:8000},{id:"bcp",label:"Base CP media mensual (€)",def:2000,min:900,max:5000}],
+    solve(v){const t=[[360,539,120],[540,719,180],[720,899,210],[900,1079,240],[1080,1259,300],[1260,1439,330],[1440,1619,360],[1620,1799,420],[1800,1979,480],[1980,2159,540],[2160,1e9,720]];
+      let dur=0;for(const [a,b,d] of t){if(v.dc>=a&&v.dc<=b){dur=d;break;}}
+      const p1=v.bcp*.7,p2=v.bcp*.5,dR=Math.max(0,dur-180);
+      const s=[{l:"¿Tiene derecho?",f:`${v.dc} días ≥ 360 → Sí ✓`},{l:"Duración",f:`${v.dc} días cotizados → ${dur} días de prestación`},{l:"BR mensual",f:`≈ ${v.bcp.toFixed(2)} €/mes`},{l:"Primeros 180 días",f:`70 % × ${v.bcp.toFixed(2)} = ${p1.toFixed(2)} €/mes`}];
+      if(dR>0)s.push({l:`Desde día 181 (${dR} d.)`,f:`50 % × ${v.bcp.toFixed(2)} = ${p2.toFixed(2)} €/mes`});
+      s.push({l:"Resumen",f:`${dur} días — 180 d. a ${p1.toFixed(2)} €/mes${dR>0?`, resto a ${p2.toFixed(2)} €/mes`:""}`,hl:true});return s;}},
+  {id:"nacimiento",title:"Nacimiento y Cuidado",icon:"👶",tag:"Nivel básico",
+    desc:"Calcula la prestación por nacimiento y cuidado del menor.",
+    inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"edad",label:"Edad del progenitor/a",def:30,min:16,max:65},{id:"dc7",label:"Días cotizados últimos 7 años",def:2100,min:0,max:6000},{id:"dcT",label:"Días cotizados totales",def:2100,min:0,max:15000}],
+    solve(v){const br=v.baseCC/30;let ok=false,txt="";
+      if(v.edad<21){ok=true;txt="< 21 años → No se exige";}
+      else if(v.edad<=26){ok=v.dc7>=90||v.dcT>=180;txt=`21-26 años → 90 d./7 años (${v.dc7}) o 180 d. total (${v.dcT})`;}
+      else{ok=v.dc7>=180||v.dcT>=360;txt=`> 26 años → 180 d./7 años (${v.dc7}) o 360 d. total (${v.dcT})`;}
+      return [{l:"Carencia",f:`${txt} → ${ok?"Cumple ✓":"No cumple ✗"}`},{l:"BR diaria",f:`${v.baseCC} ÷ 30 = ${br.toFixed(2)} €/día`},{l:"Cuantía",f:`100 % BR = ${br.toFixed(2)} €/día ≈ ${v.baseCC.toFixed(2)} €/mes`},{l:"Duración",f:"16 semanas (6 obligatorias + 10 flexibles)"},{l:"Total estimado",f:`${br.toFixed(2)} × 112 días = ${(br*112).toFixed(2)} €`,hl:true}];}},
 ];
 
 const QUIZ=[
-  {q:"La Seguridad Social se financia principalmente con:",o:["Solo impuestos del Estado","Cotizaciones + aportaciones del Estado","Donaciones y loter\u00edas","Solo cotizaciones del trabajador"],c:1},
-  {q:"Un t\u00e9cnico de radioterapia en hospital p\u00fablico pertenece al:",o:["RETA","R\u00e9gimen especial sanitario","R\u00e9gimen General","R\u00e9gimen de funcionarios"],c:2},
-  {q:"\u00bfQu\u00e9 entidad gestiona el desempleo?",o:["INSS","TGSS","SEPE","INSST"],c:2},
-  {q:"Si tienes gripe, los 3 primeros d\u00edas cobras:",o:["60 % de la BR","75 % de la BR","Nada (0 %)","100 % del salario"],c:2},
-  {q:"La prestaci\u00f3n por nacimiento dura:",o:["12 semanas","16 semanas","20 semanas","6 meses"],c:1},
+  {q:"La Seguridad Social se financia principalmente con:",o:["Solo impuestos del Estado","Cotizaciones + aportaciones del Estado","Donaciones y loterías","Solo cotizaciones del trabajador"],c:1},
+  {q:"Un técnico de radioterapia en hospital público pertenece al:",o:["RETA","Régimen especial sanitario","Régimen General","Régimen de funcionarios"],c:2},
+  {q:"¿Qué entidad gestiona el desempleo?",o:["INSS","TGSS","SEPE","INSST"],c:2},
+  {q:"Si tienes gripe, los 3 primeros días cobras:",o:["60 % de la BR","75 % de la BR","Nada (0 %)","100 % del salario"],c:2},
+  {q:"La prestación por nacimiento dura:",o:["12 semanas","16 semanas","20 semanas","6 meses"],c:1},
   {q:"Embarazada no reubicable cobra:",o:["75 % de la BR","Nada hasta el parto","100 % BR por contingencias profesionales","60 % de la BR"],c:2},
-  {q:"Para cobrar desempleo se exigen al menos:",o:["180 d. en \u00faltimos 5 a\u00f1os","360 d. en \u00faltimos 6 a\u00f1os","12 meses en \u00faltimos 3 a\u00f1os","No se exige"],c:1},
+  {q:"Para cobrar desempleo se exigen al menos:",o:["180 d. en últimos 5 años","360 d. en últimos 6 años","12 meses en últimos 3 años","No se exige"],c:1},
   {q:"El MEI en 2026 es del:",o:["0,50 %","0,70 %","0,90 %","1,20 %"],c:2},
-  {q:"Edad general de jubilaci\u00f3n en 2026:",o:["65 a\u00f1os","66 a\u00f1os y 8 meses","67 a\u00f1os","64 a\u00f1os y 6 meses"],c:1},
-  {q:"Si dimites, \u00bftienes derecho a desempleo?",o:["S\u00ed, si cotizaste suficiente","S\u00ed, pero solo el 50 %","No, no es situaci\u00f3n legal de desempleo","S\u00ed, pero solo subsidio"],c:2},
-  {q:"\u00bfEntre qu\u00e9 d\u00edas se cobra al 60 % en IT por enfermedad com\u00fan?",o:["Del 1 al 15","Del 4 al 20","Del 4 al 15","Del 1 al 20"],c:1},
-  {q:"En IT por AT/EP, desde el d\u00eda siguiente se cobra:",o:["60 %","75 %","100 %","Nada"],c:1},
-  {q:"La IP Total supone una pensi\u00f3n del:",o:["100 % de la BR","55 % BR (75 % si \u2265 55 sin empleo)","24 mensualidades","80 % de la BR"],c:1},
-  {q:"Cotizaci\u00f3n m\u00ednima para jubilarse:",o:["10 a\u00f1os","15 a\u00f1os","20 a\u00f1os","25 a\u00f1os"],c:1},
-  {q:"La capitalizaci\u00f3n del desempleo requiere al menos:",o:["1 mes pendiente","3 meses pendientes","6 meses pendientes","12 meses pendientes"],c:1},
+  {q:"Edad general de jubilación en 2026:",o:["65 años","66 años y 8 meses","67 años","64 años y 6 meses"],c:1},
+  {q:"Si dimites, ¿tienes derecho a desempleo?",o:["Sí, si cotizaste suficiente","Sí, pero solo el 50 %","No, no es situación legal de desempleo","Sí, pero solo subsidio"],c:2},
+  {q:"¿Entre qué días se cobra al 60 % en IT por enfermedad común?",o:["Del 1 al 15","Del 4 al 20","Del 4 al 15","Del 1 al 20"],c:1},
+  {q:"En IT por AT/EP, desde el día siguiente se cobra:",o:["60 %","75 %","100 %","Nada"],c:1},
+  {q:"La IP Total supone una pensión del:",o:["100 % de la BR","55 % BR (75 % si ≥ 55 sin empleo)","24 mensualidades","80 % de la BR"],c:1},
+  {q:"Cotización mínima para jubilarse:",o:["10 años","15 años","20 años","25 años"],c:1},
+  {q:"La capitalización del desempleo requiere al menos:",o:["1 mes pendiente","3 meses pendientes","6 meses pendientes","12 meses pendientes"],c:1},
 ];
 
-/* ── Styles ──────────────────────────────────── */
-var st={
-  prose:{fontSize:15,lineHeight:1.8,color:"var(--text)",margin:"8px 0",letterSpacing:"-0.1px"},
-  sub:{fontSize:14,fontWeight:700,color:"var(--accent)",margin:"20px 0 6px",letterSpacing:"-0.2px"},
-  tip:{background:"var(--green-soft)",border:"1px solid var(--green-border)",borderRadius:"var(--radius-sm)",padding:"14px 18px",margin:"14px 0",fontSize:14,lineHeight:1.7,color:"#1a7a34",display:"flex",gap:10,alignItems:"flex-start"},
-  formula:{background:"var(--amber-soft)",border:"1px solid var(--amber-border)",borderRadius:"var(--radius-sm)",padding:"14px 18px",margin:"12px 0",fontSize:13,lineHeight:1.7,color:"#8a5a00",display:"flex",gap:10,alignItems:"flex-start"},
-  tbl:{width:"100%",borderCollapse:"collapse",fontSize:13.5},
-  th:{padding:"11px 16px",textAlign:"left",fontWeight:600,color:"var(--text2)",fontSize:11.5,textTransform:"uppercase",letterSpacing:"0.5px",borderBottom:"1px solid var(--border)",background:"var(--surface2)"},
-  td:function(odd){return{padding:"11px 16px",borderBottom:"1px solid var(--border)",color:"var(--text)",lineHeight:1.55,background:odd?"var(--surface2)":"var(--surface)"}},
-  calcCard:{background:"var(--surface)",borderRadius:"var(--radius)",border:"1px solid var(--border)",overflow:"hidden",marginBottom:20,boxShadow:"var(--shadow)"},
-  calcHead:{padding:"22px 24px",display:"flex",alignItems:"center",gap:16},
-  calcIcon:function(c){return{width:48,height:48,borderRadius:"var(--radius-sm)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,background:c+"14",flexShrink:0}},
-  badge:function(c){return{fontSize:11,padding:"4px 10px",borderRadius:99,fontWeight:600,color:c,background:c+"10",border:"1px solid "+c+"30",marginLeft:"auto",flexShrink:0}},
-  inputsGrid:{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(200px,1fr))",gap:16,padding:"0 24px 20px",borderTop:"1px solid var(--border)",paddingTop:20},
-  inputLabel:{display:"block",fontSize:12,color:"var(--text2)",marginBottom:6,fontWeight:600,letterSpacing:"0.1px"},
-  input:{width:"100%",padding:"11px 14px",borderRadius:"var(--radius-xs)",border:"1px solid var(--border)",background:"var(--surface2)",color:"var(--text)",fontSize:16,fontFamily:"var(--font)",fontWeight:600,outline:"none",boxSizing:"border-box"},
-  btn:function(c){return{display:"block",width:"100%",padding:13,border:"none",borderRadius:"var(--radius-sm)",fontSize:15,fontWeight:700,cursor:"pointer",color:"#fff",background:c,fontFamily:"var(--font)",letterSpacing:"-0.2px"}},
-  steps:{padding:"0 24px 24px",display:"flex",flexDirection:"column",gap:8,borderTop:"1px solid var(--border)",paddingTop:20},
-  step:function(hl){return{padding:"14px 18px",borderRadius:"var(--radius-sm)",background:hl?"var(--accent-soft)":"var(--surface2)",borderLeft:hl?"3px solid var(--accent)":"3px solid var(--border)",animation:"fadeUp .3s ease both"}},
-  stepLabel:function(hl){return{fontSize:11,fontWeight:700,marginBottom:4,textTransform:"uppercase",letterSpacing:"0.4px",color:hl?"var(--accent)":"var(--text3)"}},
-  stepF:{fontFamily:"var(--mono)",fontSize:13.5,color:"var(--text)",lineHeight:1.6},
-  stepD:{fontSize:12,color:"var(--text2)",marginTop:3,fontWeight:500},
-  progBg:{height:4,background:"var(--surface2)",borderRadius:99,marginBottom:28,overflow:"hidden",border:"1px solid var(--border)"},
-  progFill:function(pct){return{height:"100%",borderRadius:99,background:"var(--accent)",width:pct+"%",transition:"width .4s cubic-bezier(.4,0,.2,1)"}},
-  qQ:{fontSize:18,fontWeight:600,lineHeight:1.55,marginBottom:22,color:"var(--text)",letterSpacing:"-0.3px"},
-  qOpt:function(state){var bg="var(--surface)",brd="var(--border)",clr="var(--text)";
-    if(state==="correct"){bg="var(--green-soft)";brd="var(--green)";clr="#1a7a34";}
-    if(state==="wrong"){bg="rgba(255,59,48,0.06)";brd="var(--red)";clr="#c0392b";}
-    return{display:"flex",alignItems:"center",gap:12,padding:"14px 16px",borderRadius:"var(--radius-sm)",border:"1.5px solid "+brd,background:bg,color:clr,fontSize:14,fontWeight:500,cursor:state?"default":"pointer",fontFamily:"var(--font)",textAlign:"left",width:"100%",transition:"all .2s",lineHeight:1.5}},
-  letter:function(state){var bg="var(--surface2)",c="var(--text3)";
-    if(state==="correct"){bg="var(--green)";c="#fff";}
-    if(state==="wrong"){bg="var(--red)";c="#fff";}
-    return{width:30,height:30,borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:700,flexShrink:0,background:bg,color:c,transition:"all .2s"}},
-};
-
-/* ── Components ──────────────────────────────── */
-function Block(props){
-  var section=props.section;
-  return React.createElement("div",null,section.content.map(function(b,i){
-    if(b.t==="text")return React.createElement("p",{key:i,style:st.prose},b.v);
-    if(b.t==="sub")return React.createElement("h4",{key:i,style:st.sub},b.v);
-    if(b.t==="tip")return React.createElement("div",{key:i,style:st.tip},React.createElement("span",{style:{fontSize:16,flexShrink:0,lineHeight:"24px"}},"\u{1F4A1}"),React.createElement("span",null,b.v));
-    if(b.t==="formula")return React.createElement("div",{key:i,style:st.formula},React.createElement("span",{style:{fontSize:16,flexShrink:0,lineHeight:"24px"}},"\u{1F4D0}"),React.createElement("span",{style:{fontFamily:"var(--mono)",fontSize:13}},b.v));
-    if(b.t==="table")return React.createElement("div",{key:i,style:{overflowX:"auto",margin:"16px 0",borderRadius:"var(--radius-sm)",border:"1px solid var(--border)",background:"var(--surface)"}},
-      React.createElement("table",{style:st.tbl},
-        React.createElement("thead",null,React.createElement("tr",null,b.h.map(function(h,j){return React.createElement("th",{key:j,style:st.th},h);}))),
-        React.createElement("tbody",null,b.r.map(function(r,ri){return React.createElement("tr",{key:ri},r.map(function(c,ci){return React.createElement("td",{key:ci,style:st.td(ri%2===1)},c);}));}))
-      ));
+/* ── Block renderer ── */
+function Block({section}){
+  return React.createElement("div",null,section.content.map((b,i)=>{
+    if(b.t==="text")    return React.createElement("p",{key:i,className:"block-text"},b.v);
+    if(b.t==="sub")     return React.createElement("h3",{key:i,className:"block-sub"},b.v);
+    if(b.t==="tip")     return React.createElement("div",{key:i,className:"block-tip"},React.createElement("span",{className:"block-icon"},"💡"),React.createElement("span",null,b.v));
+    if(b.t==="formula") return React.createElement("div",{key:i,className:"block-formula"},React.createElement("span",{className:"block-icon"},"📐"),React.createElement("span",null,b.v));
+    if(b.t==="table")   return React.createElement("div",{key:i,className:"tbl-wrap"},
+      React.createElement("table",null,
+        React.createElement("thead",null,React.createElement("tr",null,b.h.map((h,j)=>React.createElement("th",{key:j},h)))),
+        React.createElement("tbody",null,b.r.map((r,ri)=>React.createElement("tr",{key:ri},r.map((c,ci)=>React.createElement("td",{key:ci},c)))))));
     return null;
   }));
 }
 
-function Calc(props){
-  var ex=props.ex;
-  var stateV=useState(function(){var o={};ex.inputs.forEach(function(i){o[i.id]=i.def;});return o;});
-  var v=stateV[0],setV=stateV[1];
-  var stateR=useState(null);var res=stateR[0],setRes=stateR[1];
-  var ch=function(id,val){setV(function(p){var n=Object.assign({},p);n[id]=Number(val)||0;return n;});setRes(null);};
-  return React.createElement("div",{style:st.calcCard},
-    React.createElement("div",{style:st.calcHead},
-      React.createElement("div",{style:st.calcIcon(ex.tagColor)},ex.icon),
-      React.createElement("div",{style:{flex:1,minWidth:0}},
-        React.createElement("div",{style:{fontSize:16,fontWeight:700,color:"var(--text)",letterSpacing:"-0.3px"}},ex.title),
-        React.createElement("div",{style:{fontSize:13,color:"var(--text2)",marginTop:2}},ex.desc)),
-      React.createElement("span",{style:st.badge(ex.tagColor)},ex.tag)),
-    React.createElement("div",{style:st.inputsGrid},ex.inputs.map(function(inp){
-      return React.createElement("label",{key:inp.id,style:{display:"flex",flexDirection:"column",gap:6}},
-        React.createElement("span",{style:st.inputLabel},inp.label),
-        React.createElement("input",{type:"number",min:inp.min,max:inp.max,value:v[inp.id],onChange:function(e){ch(inp.id,e.target.value);},style:st.input}));})),
-    React.createElement("div",{style:{padding:"0 24px 20px"}},
-      React.createElement("button",{style:st.btn(ex.tagColor),onClick:function(){setRes(ex.solve(v));}},"Calcular paso a paso")),
-    res&&React.createElement("div",{style:st.steps},res.map(function(s,i){
-      return React.createElement("div",{key:i,style:st.step(s.hl)},
-        React.createElement("div",{style:st.stepLabel(s.hl)},"Paso "+(i+1)+" \u00b7 "+s.l),
-        React.createElement("div",{style:st.stepF},s.f),
-        s.d&&React.createElement("div",{style:st.stepD},s.d));}))
-  );
+/* ── Calc component ── */
+function Calc({ex}){
+  const [vals,setVals]=useState(()=>{const o={};ex.inputs.forEach(i=>{o[i.id]=i.def;});return o;});
+  const [res,setRes]=useState(null);
+  const ch=(id,v)=>{setVals(p=>({...p,[id]:Number(v)||0}));setRes(null);};
+  return React.createElement("div",{className:"calc-card"},
+    React.createElement("div",{className:"calc-head"},
+      React.createElement("span",{className:"calc-icon"},ex.icon),
+      React.createElement("div",{className:"calc-head-info"},
+        React.createElement("div",{className:"calc-head-title"},ex.title),
+        React.createElement("div",{className:"calc-head-desc"},ex.desc)),
+      React.createElement("span",{className:"calc-badge"},ex.tag)),
+    React.createElement("div",{className:"calc-inputs"},
+      ex.inputs.map(inp=>React.createElement("label",{key:inp.id},
+        React.createElement("span",{className:"calc-label"},inp.label),
+        React.createElement("input",{type:"number",className:"calc-input",min:inp.min,max:inp.max,value:vals[inp.id],onChange:e=>ch(inp.id,e.target.value)})))),
+    React.createElement("div",{className:"calc-btn-wrap"},
+      React.createElement("button",{className:"calc-btn",onClick:()=>setRes(ex.solve(vals))},"Calcular paso a paso →")),
+    res&&React.createElement("div",{className:"calc-results"},
+      res.map((s,i)=>React.createElement("div",{key:i,className:`step${s.hl?" hl":""}`,style:{animationDelay:`${i*40}ms`}},
+        React.createElement("div",{className:"step-label"},`Paso ${i+1} · ${s.l}`),
+        React.createElement("div",{className:"step-val"},s.f),
+        s.d&&React.createElement("div",{className:"step-note"},s.d)))));
 }
 
-function QuizComp(){
-  var sq=useState(function(){return QUIZ.slice().sort(function(){return Math.random()-.5;});});var qs=sq[0];
-  var sc=useState(0);var cur=sc[0],setCur=sc[1];
-  var ss=useState(null);var sel=ss[0],setSel=ss[1];
-  var sh=useState(false);var show=sh[0],setShow=sh[1];
-  var ssc=useState(0);var score=ssc[0],setScore=ssc[1];
-  var sa=useState(0);var ans=sa[0],setAns=sa[1];
-  var pick=function(i){if(show)return;setSel(i);setShow(true);setAns(function(a){return a+1;});if(i===qs[cur].c)setScore(function(s){return s+1;});};
-  var next=function(){setSel(null);setShow(false);setCur(function(c){return c+1;});};
-  var restart=function(){setCur(0);setSel(null);setShow(false);setScore(0);setAns(0);};
+/* ── Quiz component ── */
+function Quiz(){
+  const [qs]=useState(()=>QUIZ.slice().sort(()=>Math.random()-.5));
+  const [cur,setCur]=useState(0);
+  const [sel,setSel]=useState(null);
+  const [show,setShow]=useState(false);
+  const [score,setScore]=useState(0);
+  const pick=i=>{if(show)return;setSel(i);setShow(true);if(i===qs[cur].c)setScore(s=>s+1);};
+  const next=()=>{setSel(null);setShow(false);setCur(c=>c+1);};
+  const restart=()=>{setCur(0);setSel(null);setShow(false);setScore(0);};
 
   if(cur>=qs.length){
-    var pct=Math.round(score/qs.length*100);
-    var clr=pct>=70?"var(--green)":pct>=50?"var(--amber)":"var(--red)";
-    return React.createElement("div",{style:{textAlign:"center",padding:"40px 20px",animation:"scaleIn .4s ease"}},
-      React.createElement("div",{style:{fontSize:72,marginBottom:8}},pct>=70?"\u{1F389}":pct>=50?"\u{1F4AA}":"\u{1F4DA}"),
-      React.createElement("div",{style:{fontSize:52,fontWeight:700,color:clr,letterSpacing:"-2px",lineHeight:1}},pct+"%"),
-      React.createElement("div",{style:{fontSize:16,fontWeight:600,color:"var(--text)",marginTop:8}},score+" de "+qs.length+" correctas"),
-      React.createElement("p",{style:{color:"var(--text2)",fontSize:14,margin:"16px auto 32px",maxWidth:300,lineHeight:1.6}},pct>=70?"\u00a1Excelente! Dominas el tema.":pct>=50?"Buen intento. Repasa los temas que fallaste.":"Necesitas repasar. \u00a1\u00c1nimo!"),
-      React.createElement("button",{style:Object.assign({},st.btn("var(--accent)"),{maxWidth:220,margin:"0 auto"}),onClick:restart},"Repetir test"));
+    const pct=Math.round(score/qs.length*100);
+    const clr=pct>=70?"var(--green)":pct>=50?"var(--gold)":"var(--terracotta)";
+    return React.createElement("div",{className:"quiz-end"},
+      React.createElement("div",{className:"quiz-end-emoji"},pct>=70?"🎉":pct>=50?"💪":"📚"),
+      React.createElement("div",{className:"quiz-end-pct",style:{color:clr}},pct+"%"),
+      React.createElement("div",{className:"quiz-end-label"},`${score} de ${qs.length} correctas`),
+      React.createElement("p",{className:"quiz-end-msg"},pct>=70?"¡Excelente! Dominas el tema.":pct>=50?"Buen intento. Repasa los temas que fallaste.":"Necesitas repasar. ¡Ánimo!"),
+      React.createElement("button",{className:"quiz-next",style:{maxWidth:220,margin:"0 auto",display:"block"},onClick:restart},"Repetir test"));
   }
 
-  var q=qs[cur];
-  return React.createElement("div",{style:{animation:"fadeUp .3s ease"}},
-    React.createElement("div",{style:{display:"flex",justifyContent:"space-between",marginBottom:14}},
-      React.createElement("span",{style:{color:"var(--text3)",fontSize:13,fontWeight:600}},(cur+1)+" / "+qs.length),
-      React.createElement("span",{style:{color:"var(--accent)",fontSize:13,fontWeight:700}},score+" correctas")),
-    React.createElement("div",{style:st.progBg},React.createElement("div",{style:st.progFill(cur/qs.length*100)})),
-    React.createElement("h3",{style:st.qQ},q.q),
-    React.createElement("div",{style:{display:"flex",flexDirection:"column",gap:8}},q.o.map(function(opt,i){
-      var state=null;if(show){if(i===q.c)state="correct";else if(i===sel)state="wrong";}
-      return React.createElement("button",{key:i,style:st.qOpt(state),onClick:function(){pick(i);}},
-        React.createElement("span",{style:st.letter(state)},show&&i===q.c?"\u2713":show&&i===sel?"\u2717":String.fromCharCode(65+i)),opt);})),
-    show&&React.createElement("button",{style:Object.assign({},st.btn("var(--accent)"),{marginTop:20}),onClick:next},cur+1<qs.length?"Siguiente \u2192":"Ver resultado"));
+  const q=qs[cur];
+  return React.createElement("div",null,
+    React.createElement("div",{className:"quiz-meta"},
+      React.createElement("span",{className:"quiz-counter"},`Pregunta ${cur+1} / ${qs.length}`),
+      React.createElement("span",{className:"quiz-score"},`${score} correctas`)),
+    React.createElement("div",{className:"quiz-progress"},
+      React.createElement("div",{className:"quiz-progress-fill",style:{width:`${cur/qs.length*100}%`}})),
+    React.createElement("p",{className:"quiz-q"},q.q),
+    React.createElement("div",{className:"quiz-options"},
+      q.o.map((opt,i)=>{
+        const cls=show?(i===q.c?"quiz-opt correct":i===sel?"quiz-opt wrong":"quiz-opt"):"quiz-opt";
+        const lbl=show&&i===q.c?"✓":show&&i===sel?"✗":["A","B","C","D"][i];
+        return React.createElement("button",{key:i,className:cls,onClick:()=>pick(i),disabled:show},
+          React.createElement("span",{className:"quiz-letter"},lbl),opt);})),
+    show&&React.createElement("button",{className:"quiz-next",onClick:next},cur+1<qs.length?"Siguiente →":"Ver resultado"));
 }
 
-/* ── Tab icons as SVG strings ────────────────── */
-function TabIcon(props){
-  var paths={
-    teoria:"M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25",
-    calc:"M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm2.498-2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z",
-    quiz:"M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-  };
-  return React.createElement("svg",{width:18,height:18,fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2},
-    React.createElement("path",{strokeLinecap:"round",strokeLinejoin:"round",d:paths[props.name]}));
-}
-
-var TABS=[{id:"teoria",label:"Teor\u00eda",icon:"teoria"},{id:"calc",label:"Calculadora",icon:"calc"},{id:"quiz",label:"Test",icon:"quiz"}];
+/* ── App ── */
+const TABS=[{id:"teoria",label:"Teoría",emoji:"📖"},{id:"calc",label:"Calculadora",emoji:"🧮"},{id:"quiz",label:"Test",emoji:"✅"}];
 
 function App(){
-  var st1=useState("teoria");var tab=st1[0],setTab=st1[1];
-  var st2=useState("bases");var sec=st2[0],setSec=st2[1];
-
-  return React.createElement("div",{style:{minHeight:"100vh",background:"var(--bg)"}},
-    /* Header */
-    React.createElement("header",{style:{background:"var(--surface)",borderBottom:"1px solid var(--border)",padding:"28px 24px"}},
-      React.createElement("div",{style:{maxWidth:840,margin:"0 auto",display:"flex",alignItems:"center",gap:12}},
-        React.createElement("div",{style:{width:42,height:42,borderRadius:12,background:"var(--accent-soft)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}},"\u{1F6E1}\uFE0F"),
-        React.createElement("div",null,
-          React.createElement("h1",{style:{fontSize:20,fontWeight:700,letterSpacing:"-0.4px",color:"var(--text)"}},"Seguridad Social en Espa\u00f1a"),
-          React.createElement("p",{style:{fontSize:13,color:"var(--text3)",marginTop:2,fontWeight:500}},"FP Superior \u00b7 Radioterapia y Dosimetr\u00eda / Imagen Diagn\u00f3stica \u00b7 2026")))),
-    /* Tabs */
-    React.createElement("nav",{style:{background:"var(--surface)",borderBottom:"1px solid var(--border)",position:"sticky",top:0,zIndex:50}},
-      React.createElement("div",{style:{maxWidth:840,margin:"0 auto",display:"flex",padding:"0 24px",gap:4}},
-        TABS.map(function(t){return React.createElement("button",{key:t.id,onClick:function(){setTab(t.id);},style:{display:"flex",alignItems:"center",gap:7,padding:"13px 16px",border:"none",background:"transparent",cursor:"pointer",fontSize:14,fontWeight:tab===t.id?600:500,fontFamily:"var(--font)",color:tab===t.id?"var(--accent)":"var(--text2)",borderBottom:tab===t.id?"2px solid var(--accent)":"2px solid transparent",marginBottom:-1}},
-          React.createElement(TabIcon,{name:t.icon}),t.label);}))),
-    /* Content */
-    React.createElement("main",{style:{maxWidth:840,margin:"0 auto",padding:"28px 24px 60px"}},
+  const [tab,setTab]=useState("teoria");
+  const [sec,setSec]=useState("bases");
+  const cur=THEORY.find(s=>s.id===sec);
+  return React.createElement(React.Fragment,null,
+    /* NAV */
+    React.createElement("nav",null,
+      React.createElement("div",{className:"nav-brand"},React.createElement("span",{className:"nav-dot"}),"\u00a0CIFP Cerdeño"),
+      React.createElement("a",{className:"nav-back",href:"#"},"← IPE I")),
+    /* HERO */
+    React.createElement("div",{className:"hero"},
+      React.createElement("div",{className:"hero-inner"},
+        React.createElement("div",{className:"hero-label"},"Seguridad Social"),
+        React.createElement("h1",null,"La ",React.createElement("em",null,"Seguridad")," Social"),
+        React.createElement("p",{className:"hero-sub"},"Regímenes, cotizaciones, prestaciones y derechos ante el sistema público de protección social."))),
+    /* TABS */
+    React.createElement("div",{className:"tabs-bar"},
+      TABS.map(t=>React.createElement("button",{key:t.id,className:`tab-btn${tab===t.id?" active":""}`,onClick:()=>setTab(t.id)},t.emoji," ",t.label))),
+    /* MAIN */
+    React.createElement("main",null,
       tab==="teoria"&&React.createElement(React.Fragment,null,
-        React.createElement("div",{style:{display:"flex",flexWrap:"wrap",gap:6,marginBottom:28}},
-          THEORY.map(function(s){return React.createElement("button",{key:s.id,onClick:function(){setSec(s.id);},style:{padding:"8px 16px",borderRadius:99,fontSize:13,fontWeight:sec===s.id?600:500,fontFamily:"var(--font)",cursor:"pointer",whiteSpace:"nowrap",border:sec===s.id?"1px solid var(--accent)":"1px solid var(--border)",background:sec===s.id?"var(--accent-soft)":"var(--surface)",color:sec===s.id?"var(--accent)":"var(--text2)"}},s.icon+"  "+s.title);})),
-        THEORY.filter(function(s){return s.id===sec;}).map(function(s){return React.createElement("div",{key:s.id,style:{background:"var(--surface)",borderRadius:"var(--radius)",border:"1px solid var(--border)",padding:"28px 28px 24px",boxShadow:"var(--shadow)",animation:"fadeUp .3s ease"}},
-          React.createElement("div",{style:{display:"flex",alignItems:"center",gap:12,marginBottom:20}},
-            React.createElement("span",{style:{fontSize:30}},s.icon),
-            React.createElement("h2",{style:{fontSize:22,fontWeight:700,letterSpacing:"-0.4px"}},s.title)),
-          React.createElement(Block,{section:s}));})),
-      tab==="calc"&&React.createElement("div",{style:{animation:"fadeUp .3s ease"}},
-        React.createElement("div",{style:{marginBottom:28}},
-          React.createElement("h2",{style:{fontSize:22,fontWeight:700,letterSpacing:"-0.4px",display:"flex",alignItems:"center",gap:10}},React.createElement("span",{style:{fontSize:28}},"\u{1F9EE}"),"Calculadora de Prestaciones"),
-          React.createElement("p",{style:{color:"var(--text2)",fontSize:14,marginTop:6,lineHeight:1.6}},"Modifica los valores y pulsa \u00abCalcular\u00bb para ver la soluci\u00f3n paso a paso.")),
-        EXERCISES.map(function(ex){return React.createElement(Calc,{key:ex.id,ex:ex});})),
-      tab==="quiz"&&React.createElement("div",{style:{animation:"fadeUp .3s ease"}},
-        React.createElement("div",{style:{marginBottom:28}},
-          React.createElement("h2",{style:{fontSize:22,fontWeight:700,letterSpacing:"-0.4px",display:"flex",alignItems:"center",gap:10}},React.createElement("span",{style:{fontSize:28}},"\u2705"),"Test de Autoevaluaci\u00f3n"),
-          React.createElement("p",{style:{color:"var(--text2)",fontSize:14,marginTop:6,lineHeight:1.6}},"15 preguntas en orden aleatorio. \u00a1Comprueba cu\u00e1nto sabes!")),
-        React.createElement("div",{style:{background:"var(--surface)",borderRadius:"var(--radius)",border:"1px solid var(--border)",padding:28,boxShadow:"var(--shadow)"}},
-          React.createElement(QuizComp,null)))),
-    /* Footer */
-    React.createElement("footer",{style:{textAlign:"center",padding:"20px 24px",color:"var(--text3)",fontSize:12,fontWeight:500,borderTop:"1px solid var(--border)"}},"IPE I \u00b7 Seguridad Social \u00b7 Curso 2025-2026"));
+        React.createElement("div",{className:"eyebrow"},"Selecciona una sección"),
+        React.createElement("div",{className:"pills"},
+          THEORY.map(s=>React.createElement("button",{key:s.id,className:`pill${sec===s.id?" active":""}`,onClick:()=>setSec(s.id)},s.icon+"  "+s.title))),
+        cur&&React.createElement("div",{key:sec,className:"theory-card"},
+          React.createElement("div",{className:"theory-card-head"},
+            React.createElement("span",{className:"theory-icon"},cur.icon),
+            React.createElement("div",null,
+              React.createElement("h2",null,cur.title),
+              React.createElement("div",{className:"unit-tag"},"FOL · Seguridad Social · 2026"))),
+          React.createElement("div",{className:"theory-body"},React.createElement(Block,{section:cur})))),
+      tab==="calc"&&React.createElement("div",null,
+        React.createElement("div",{className:"eyebrow"},"Calculadora de prestaciones"),
+        React.createElement("div",{className:"calc-intro"},
+          React.createElement("p",null,"Modifica los valores y pulsa «Calcular» para ver la solución paso a paso con todos los tramos y quién paga cada parte.")),
+        EXERCISES.map(ex=>React.createElement(Calc,{key:ex.id,ex:ex}))),
+      tab==="quiz"&&React.createElement("div",null,
+        React.createElement("div",{className:"eyebrow"},"Test de autoevaluación"),
+        React.createElement("div",{className:"quiz-wrap"},React.createElement(Quiz,null)))),
+    /* FOOTER */
+    React.createElement("footer",null,
+      React.createElement("div",null,React.createElement("strong",null,"CIFP Cerdeño")," · Itinerario Personal para la Empleabilidad I"),
+      React.createElement("div",null,"Curso 2025–2026")));
 }
 
 ReactDOM.render(React.createElement(App,null),document.getElementById("root"));

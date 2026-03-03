@@ -448,7 +448,7 @@ const THEORY=[
 ];
 
 const EXERCISES=[
-  {id:"it_comun",title:"IT · Enfermedad Común",icon:"🩺",tag:"Nivel medio",
+  {id:"it_comun",title:"IT · Enfermedad Común",icon:"🩺",
     headBg:"#ddeaf5",headBorder:"#a8c8e8",headText:"#1a4a6e",badgeBg:"rgba(255,255,255,.7)",
     desc:"Calcula paso a paso lo que cobra un trabajador de baja por enfermedad común.",
     inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"dias",label:"Días de baja",def:18,min:1,max:545}],
@@ -456,7 +456,7 @@ const EXERCISES=[
       const s=[{l:"Base reguladora diaria",f:`${v.baseCC} ÷ 30 = ${br.toFixed(2)} €/día`},{l:`Días 1-3 (${Math.min(d,3)} d.)`,f:"0 % → 0,00 €",d:"No paga nadie"},{l:`Días 4-15 (${d2} d.)`,f:`60 % × ${br.toFixed(2)} = ${(br*.6).toFixed(2)} €/día × ${d2} = ${t2.toFixed(2)} €`,d:"Paga: Empresario"},{l:`Días 16-20 (${d3} d.)`,f:`60 % × ${br.toFixed(2)} = ${(br*.6).toFixed(2)} €/día × ${d3} = ${t3.toFixed(2)} €`,d:"Paga: INSS / Mutua"}];
       if(d4>0)s.push({l:`Días 21+ (${d4} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${d4} = ${t4.toFixed(2)} €`,d:"Paga: INSS / Mutua"});
       s.push({l:"Total cobrado",f:`${tot.toFixed(2)} €`,hl:true});return s;}},
-  {id:"it_at",title:"IT · Accidente de Trabajo",icon:"⚠️",tag:"Nivel medio",
+  {id:"it_at",title:"IT · Accidente de Trabajo",icon:"⚠️",
     headBg:"#fceee0",headBorder:"#f0b98a",headText:"#7a3010",badgeBg:"rgba(255,255,255,.7)",
     desc:"Calcula lo que cobra un trabajador tras un accidente laboral.",
     inputs:[{id:"baseCPP",label:"Base CP mes anterior (€)",def:2100,min:900,max:5000},{id:"he",label:"Horas extra año anterior (€)",def:0,min:0,max:10000},{id:"dias",label:"Días de baja",def:10,min:1,max:545}],
@@ -464,7 +464,7 @@ const EXERCISES=[
       const s=[{l:"BR diaria (base)",f:`${v.baseCPP} ÷ 30 = ${brB.toFixed(2)} €/día`}];
       if(v.he>0)s.push({l:"BR (horas extra)",f:`${v.he} ÷ 365 = ${brH.toFixed(2)} €/día`});
       s.push({l:"BR diaria total",f:`${br.toFixed(2)} €/día`},{l:"Día 1 (baja)",f:`Salario íntegro = ${br.toFixed(2)} €`,d:"Paga: Empresario"},{l:`Días 2-${v.dias} (${r} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${r} = ${resto.toFixed(2)} €`,d:"Paga: Mutua / INSS"},{l:"Total cobrado",f:`${(br+resto).toFixed(2)} €`,hl:true});return s;}},
-  {id:"desempleo",title:"Desempleo",icon:"📉",tag:"Nivel alto",
+  {id:"desempleo",title:"Desempleo",icon:"📉",
     headBg:"#e8e0f0",headBorder:"#b8a0d8",headText:"#3d1f6e",badgeBg:"rgba(255,255,255,.7)",
     desc:"Calcula duración y cuantía de la prestación por desempleo.",
     inputs:[{id:"dc",label:"Días cotizados (últimos 6 años)",def:5110,min:360,max:8000},{id:"bcp",label:"Base CP media mensual (€)",def:2000,min:900,max:5000}],
@@ -474,7 +474,7 @@ const EXERCISES=[
       const s=[{l:"¿Tiene derecho?",f:`${v.dc} días ≥ 360 → Sí ✓`},{l:"Duración",f:`${v.dc} días cotizados → ${dur} días de prestación`},{l:"BR mensual",f:`≈ ${v.bcp.toFixed(2)} €/mes`},{l:"Primeros 180 días",f:`70 % × ${v.bcp.toFixed(2)} = ${p1.toFixed(2)} €/mes`}];
       if(dR>0)s.push({l:`Desde día 181 (${dR} d.)`,f:`50 % × ${v.bcp.toFixed(2)} = ${p2.toFixed(2)} €/mes`});
       s.push({l:"Resumen",f:`${dur} días — 180 d. a ${p1.toFixed(2)} €/mes${dR>0?`, resto a ${p2.toFixed(2)} €/mes`:""}`,hl:true});return s;}},
-  {id:"nacimiento",title:"Nacimiento y Cuidado",icon:"👶",tag:"Nivel básico",
+  {id:"nacimiento",title:"Nacimiento y Cuidado",icon:"👶",
     headBg:"#ddf0e8",headBorder:"#88ccaa",headText:"#1a4a30",badgeBg:"rgba(255,255,255,.7)",
     desc:"Calcula la prestación por nacimiento y cuidado del menor.",
     inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"edad",label:"Edad del progenitor/a",def:30,min:16,max:65},{id:"dc7",label:"Días cotizados últimos 7 años",def:2100,min:0,max:6000},{id:"dcT",label:"Días cotizados totales",def:2100,min:0,max:15000}],
@@ -527,7 +527,7 @@ function Calc({ex}){
       React.createElement("div",{style:{flex:1}},
         React.createElement("div",{className:"calc-head-title",style:{color:ex.headText}},ex.title),
         React.createElement("div",{className:"calc-head-desc",style:{color:ex.headText,opacity:.7}},ex.desc)),
-      React.createElement("span",{className:"calc-badge",style:{background:ex.badgeBg,color:ex.headText,borderColor:ex.headBorder}},ex.tag)),
+      ),
     React.createElement("div",{className:"calc-inputs"},
       ex.inputs.map(inp=>React.createElement("label",{key:inp.id},
         React.createElement("span",{className:"calc-label"},inp.label),

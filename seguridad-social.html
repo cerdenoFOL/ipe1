@@ -10,284 +10,173 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
 <style>
 :root {
-  --cream: #f5f0e8;
-  --white: #fdfcf9;
-  --terracotta: #c0533a; --terracotta-light: #e8d5cf; --terracotta-dark: #8f3726;
-  --slate: #2d3f50;
-  --gold: #c8973a; --gold-light: #f0e4c8; --gold-dark: #a97a20;
-  --green: #3a7d5a; --green-light: #d0eadb;
-  --text: #1e2a35; --muted: #7a8b96; --border: #ddd5c8;
-  --radius: 12px;
+  --cream:#f5f0e8; --white:#fdfcf9;
+  --terracotta:#c0533a; --terracotta-light:#e8d5cf; --terracotta-dark:#8f3726;
+  --slate:#2d3f50;
+  --gold:#c8973a; --gold-light:#f0e4c8; --gold-dark:#a97a20;
+  --green:#3a7d5a; --green-light:#d0eadb;
+  --text:#1e2a35; --muted:#7a8b96; --border:#ddd5c8; --radius:12px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Lato', sans-serif;
-  background: var(--cream); color: var(--text); min-height: 100vh;
-}
-body::before {
-  content: ''; position: fixed; inset: 0;
-  background-image: repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(0,0,0,0.018) 24px, rgba(0,0,0,0.018) 25px);
-  pointer-events: none; z-index: 0;
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(0,0,0,0.018) 24px,rgba(0,0,0,0.018) 25px);pointer-events:none;z-index:0}
 
-/* ── NAV ── */
-nav {
-  position: relative; z-index: 10;
-  background: var(--white); border-bottom: 1px solid var(--border);
-  padding: 16px 40px; display: flex; align-items: center; justify-content: space-between;
-}
-.nav-brand {
-  font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700;
-  color: var(--slate); display: flex; align-items: center; gap: 10px;
-}
-.nav-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); }
-.nav-tag {
-  font-size: 12px; color: var(--muted); border: 1px solid var(--border);
-  padding: 4px 14px; border-radius: 100px; background: var(--cream);
-}
+/* NAV */
+nav{position:relative;z-index:10;background:var(--white);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--slate);display:flex;align-items:center;gap:10px}
+.nav-dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-tag{font-size:12px;color:var(--muted);border:1px solid var(--border);padding:4px 14px;border-radius:100px;background:var(--cream)}
+.nav-nick{font-size:12px;font-weight:700;color:var(--gold-dark);border:1px solid #e0c87a;padding:4px 14px;border-radius:100px;background:var(--gold-light);cursor:pointer;transition:all .15s}
+.nav-nick:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 
-/* ── TABS (sticky, just below nav) ── */
-.tabs-bar {
-  position: sticky; top: 0; z-index: 20;
-  background: var(--white); border-bottom: 1px solid var(--border);
-  padding: 0 40px; display: flex; gap: 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-.tab-btn {
-  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700;
-  padding: 15px 22px; border: none; background: transparent; cursor: pointer;
-  color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px;
-  transition: color .15s, border-color .15s; display: flex; align-items: center; gap: 7px;
-}
-.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
-.tab-btn:hover:not(.active) { color: var(--text); }
+/* TABS */
+.tabs-bar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+.tab-btn{font-family:'Lato',sans-serif;font-size:14px;font-weight:700;padding:15px 22px;border:none;background:transparent;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:7px}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-btn:hover:not(.active){color:var(--text)}
 
-/* ── MAIN ── */
-main {
-  position: relative; z-index: 1;
-  max-width: 880px; margin: 0 auto; padding: 48px 40px 100px;
-  animation: fadeUp .4s ease both;
-}
+/* MAIN */
+main{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:48px 40px 100px;animation:fadeUp .4s ease both}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
+.section-header{margin-bottom:32px}
+.section-header h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);font-weight:800;line-height:1.1;color:var(--slate);margin-bottom:8px}
+.section-header h2 em{font-style:italic;color:var(--gold)}
+.section-header p{font-size:15px;color:var(--muted);font-weight:300;line-height:1.7;max-width:520px}
 
-/* eyebrow */
-.eyebrow {
-  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--terracotta); display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
-}
-.eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+/* PILLS */
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.pill{font-family:'Lato',sans-serif;font-size:13px;font-weight:700;padding:7px 16px;border-radius:100px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
+.pill.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.pill:hover:not(.active){border-color:var(--slate);color:var(--text)}
 
-/* section title (inside main, replaces hero) */
-.section-header { margin-bottom: 32px; }
-.section-header h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 4vw, 40px); font-weight: 800; line-height: 1.1;
-  color: var(--slate); margin-bottom: 8px;
-}
-.section-header h2 em { font-style: italic; color: var(--gold); }
-.section-header p { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; max-width: 520px; }
+/* THEORY CARD */
+.theory-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .3s ease both}
+.theory-card-head{display:flex;align-items:center;gap:16px;padding:24px 28px;border-bottom:1px solid var(--border);background:var(--slate)}
+.theory-icon{font-size:28px}
+.theory-card-head h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--white);line-height:1.15}
+.theory-card-head .unit-tag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-top:4px}
+.theory-body{padding:28px 32px;background:var(--white)}
+.block-text{font-size:15px;line-height:1.85;color:var(--text);margin:8px 0}
+.block-sub{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--slate);margin:26px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.block-tip{display:flex;gap:12px;align-items:flex-start;background:var(--green-light);border:1px solid #a8d5be;border-radius:8px;padding:13px 16px;margin:14px 0;font-size:14px;line-height:1.7;color:#1e4a32}
+.block-formula{display:flex;gap:12px;align-items:flex-start;background:var(--gold-light);border:1px solid #e0c87a;border-radius:8px;padding:13px 16px;margin:12px 0;font-size:13.5px;color:#5c3d0a;line-height:1.7;font-weight:700}
+.block-icon{font-size:15px;flex-shrink:0;margin-top:1px}
+.tbl-wrap{overflow-x:auto;margin:16px 0;border-radius:8px;border:1px solid var(--border);background:var(--white)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{padding:11px 18px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--white);border-bottom:1px solid rgba(255,255,255,.15);background:var(--slate)}
+tbody td{padding:12px 18px;border-bottom:1px solid var(--border);line-height:1.55;color:var(--text)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even) td{background:var(--cream)}
 
-/* pills */
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.pill {
-  font-family: 'Lato', sans-serif; font-size: 13px; font-weight: 700;
-  padding: 7px 16px; border-radius: 100px;
-  border: 1px solid var(--border); background: var(--white);
-  color: var(--muted); cursor: pointer; transition: all .15s; white-space: nowrap;
-}
-.pill.active { background: var(--gold); border-color: var(--gold); color: #fff; }
-.pill:hover:not(.active) { border-color: var(--slate); color: var(--text); }
+/* CALC */
+.calc-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 16px rgba(45,63,80,0.07),0 1px 3px rgba(45,63,80,0.05)}
+.calc-head{padding:22px 26px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
+.calc-icon{font-size:26px;flex-shrink:0;line-height:1}
+.calc-head-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1.2}
+.calc-head-desc{font-size:13px;margin-top:3px;font-weight:400;line-height:1.5;opacity:.7}
+.calc-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:16px;padding:22px 26px}
+.calc-label{font-size:11px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:7px}
+.calc-input{width:100%;padding:11px 14px;border-radius:8px;border:1.5px solid var(--border);background:var(--cream);color:var(--text);font-size:16px;font-family:'Lato',sans-serif;font-weight:700;outline:none;transition:border-color .15s,background .15s}
+.calc-input:focus{border-color:var(--gold);background:var(--white)}
+.calc-btn-wrap{padding:0 26px 22px}
+.calc-btn{font-family:'Lato',sans-serif;font-size:14px;font-weight:700;letter-spacing:.02em;padding:13px 0;width:100%;border:none;border-radius:8px;background:var(--gold);color:#fff;cursor:pointer;transition:background .15s}
+.calc-btn:hover{background:var(--gold-dark)}
+.calc-results{padding:0 26px 24px;background:var(--white);border-top:1px solid var(--border);padding-top:20px;display:flex;flex-direction:column;gap:8px}
+.step{padding:12px 16px;border-radius:8px;background:var(--cream);border:1px solid var(--border);border-left:3px solid #d5c9b8;animation:fadeUp .25s ease both}
+.step.hl{background:var(--gold-light);border-color:#e0c87a;border-left:3px solid var(--gold)}
+.step-label{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
+.step.hl .step-label{color:var(--gold-dark)}
+.step-val{font-size:14px;font-weight:700;color:var(--text);line-height:1.6}
+.step-note{font-size:12px;color:var(--muted);margin-top:4px}
 
-/* theory card */
-.theory-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-  animation: fadeUp .3s ease both;
-}
-.theory-card-head {
-  display: flex; align-items: center; gap: 16px;
-  padding: 24px 28px; border-bottom: 1px solid var(--border);
-  background: var(--slate);           /* slate head — contrasts cleanly */
-}
-.theory-icon { font-size: 28px; }
-.theory-card-head h2 {
-  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 800;
-  color: var(--white); line-height: 1.15;
-}
-.theory-card-head .unit-tag {
-  font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: rgba(255,255,255,.45); margin-top: 4px;
-}
-.theory-body { padding: 28px 32px; background: var(--white); }
+/* QUIZ */
+.quiz-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.quiz-inner{padding:28px 32px}
+.quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.quiz-counter{font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--muted)}
+.quiz-score{font-size:11px;font-weight:700;color:var(--gold-dark);background:var(--gold-light);border:1px solid #e0c87a;padding:3px 12px;border-radius:100px}
+.quiz-progress{height:3px;background:var(--terracotta-light);border-radius:99px;margin-bottom:24px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:var(--terracotta);border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.quiz-q{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;line-height:1.5;margin-bottom:20px;color:var(--slate)}
+.quiz-options{display:flex;flex-direction:column;gap:9px}
+.quiz-opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--cream);font-family:'Lato',sans-serif;font-size:14px;color:var(--text);cursor:pointer;text-align:left;width:100%;transition:all .15s;line-height:1.5}
+.quiz-opt:hover:not(:disabled){border-color:var(--slate);background:var(--white)}
+.quiz-opt.correct{background:var(--green-light);border-color:var(--green);color:#1e4a32}
+.quiz-opt.wrong{background:var(--terracotta-light);border-color:var(--terracotta);color:var(--terracotta-dark)}
+.quiz-letter{width:27px;height:27px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--white);border:1px solid var(--border);color:var(--muted);transition:all .15s}
+.quiz-opt.correct .quiz-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-opt.wrong .quiz-letter{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
 
-/* content blocks */
-.block-text { font-size: 15px; line-height: 1.85; color: var(--text); margin: 8px 0; }
-.block-sub {
-  font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700;
-  color: var(--slate); margin: 26px 0 10px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.block-tip {
-  display: flex; gap: 12px; align-items: flex-start;
-  background: var(--green-light); border: 1px solid #a8d5be;
-  border-radius: 8px; padding: 13px 16px; margin: 14px 0;
-  font-size: 14px; line-height: 1.7; color: #1e4a32;
-}
-.block-formula {
-  display: flex; gap: 12px; align-items: flex-start;
-  background: var(--gold-light); border: 1px solid #e0c87a;
-  border-radius: 8px; padding: 13px 16px; margin: 12px 0;
-  font-size: 13.5px; color: #5c3d0a; line-height: 1.7; font-weight: 700;
-}
-.block-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+/* feedback box */
+.quiz-feedback{margin-top:14px;padding:13px 16px;border-radius:8px;font-size:14px;line-height:1.65;animation:fadeUp .25s ease both}
+.quiz-feedback.ok{background:var(--green-light);border:1px solid #a8d5be;color:#1e4a32}
+.quiz-feedback.ko{background:var(--terracotta-light);border:1px solid #d4a090;color:var(--terracotta-dark)}
+.quiz-feedback strong{font-weight:700}
 
-/* tables */
-.tbl-wrap {
-  overflow-x: auto; margin: 16px 0;
-  border-radius: 8px; border: 1px solid var(--border);
-  background: var(--white);
-}
-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-thead th {
-  padding: 11px 18px; text-align: left; font-size: 11px; font-weight: 700;
-  letter-spacing: .6px; text-transform: uppercase; color: var(--white);
-  border-bottom: 1px solid rgba(255,255,255,.15); background: var(--slate);
-}
-tbody td { padding: 12px 18px; border-bottom: 1px solid var(--border); line-height: 1.55; color: var(--text); }
-tbody tr:last-child td { border-bottom: none; }
-tbody tr:nth-child(even) td { background: var(--cream); }
+.quiz-next{display:block;width:100%;padding:13px;border:none;border-radius:8px;background:var(--terracotta);color:#fff;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:16px}
+.quiz-next:hover{background:var(--terracotta-dark)}
+.quiz-end{text-align:center;padding:40px 16px;animation:scaleIn .4s ease both}
+.quiz-end-emoji{font-size:56px;margin-bottom:8px}
+.quiz-end-pct{font-family:'Playfair Display',serif;font-size:72px;font-weight:800;line-height:1}
+.quiz-end-label{font-size:15px;color:var(--muted);margin-top:8px}
+.quiz-end-msg{font-size:14px;color:var(--muted);margin:16px auto 28px;max-width:280px;line-height:1.65;font-weight:300}
+.quiz-end-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.quiz-restart{padding:12px 28px;border:none;border-radius:8px;background:var(--terracotta);color:#fff;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
+.quiz-restart:hover{background:var(--terracotta-dark)}
+.quiz-ranking-btn{padding:12px 28px;border:1.5px solid var(--gold);border-radius:8px;background:transparent;color:var(--gold-dark);font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
+.quiz-ranking-btn:hover{background:var(--gold);color:#fff}
 
-/* ── CALC ── */
-.calc-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden; margin-bottom: 24px;
-  box-shadow: 0 4px 16px rgba(45,63,80,0.07), 0 1px 3px rgba(45,63,80,0.05);
-}
-.calc-head {
-  padding: 22px 26px; display: flex; align-items: center; gap: 14px;
-  background: var(--gold-light);
-  border-bottom: 1px solid #e0c87a;
-}
-.calc-icon { font-size: 26px; flex-shrink: 0; line-height: 1; }
-.calc-head-title {
-  font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700;
-  color: var(--slate); line-height: 1.2;
-}
-.calc-head-desc { font-size: 13px; color: #7a5a18; margin-top: 3px; font-weight: 400; line-height: 1.5; }
-.calc-badge {
-  font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
-  background: rgba(255,255,255,.65); color: #7a5a18; border: 1px solid #e0c87a;
-  flex-shrink: 0; margin-left: auto; white-space: nowrap;
-}
-.calc-inputs {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
-  gap: 16px; padding: 22px 26px;
-}
-.calc-label {
-  font-size: 11px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase;
-  color: var(--muted); display: block; margin-bottom: 7px;
-}
-.calc-input {
-  width: 100%; padding: 11px 14px; border-radius: 8px;
-  border: 1.5px solid var(--border); background: var(--cream);
-  color: var(--text); font-size: 16px; font-family: 'Lato', sans-serif; font-weight: 700;
-  outline: none; transition: border-color .15s, background .15s;
-}
-.calc-input:focus { border-color: var(--gold); background: var(--white); }
-.calc-btn-wrap { padding: 0 26px 22px; }
-.calc-btn {
-  font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .02em;
-  padding: 13px 0; width: 100%; border: none; border-radius: 8px;
-  background: var(--gold); color: #fff; cursor: pointer; transition: background .15s;
-}
-.calc-btn:hover { background: var(--gold-dark); }
-.calc-results {
-  padding: 0 26px 24px; background: var(--white);
-  border-top: 1px solid var(--border);
-  padding-top: 20px; display: flex; flex-direction: column; gap: 8px;
-}
-.step {
-  padding: 12px 16px; border-radius: 8px;
-  background: var(--cream); border: 1px solid var(--border);
-  border-left: 3px solid #d5c9b8;
-  animation: fadeUp .25s ease both;
-}
-.step.hl {
-  background: var(--gold-light); border-color: #e0c87a;
-  border-left: 3px solid var(--gold);
-}
-.step-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); margin-bottom: 5px; }
-.step.hl .step-label { color: var(--gold-dark); }
-.step-val { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.6; }
-.step-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+/* RANKING */
+.ranking-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.ranking-head{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.ranking-head h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--slate)}
+.ranking-head p{font-size:13px;color:var(--muted);margin-top:2px}
+.ranking-refresh{font-size:12px;font-weight:700;color:var(--muted);background:var(--cream);border:1px solid var(--border);padding:6px 14px;border-radius:100px;cursor:pointer;transition:all .15s}
+.ranking-refresh:hover{color:var(--text);border-color:var(--text)}
+.ranking-list{padding:16px 0}
+.ranking-row{display:flex;align-items:center;gap:14px;padding:12px 28px;border-bottom:1px solid var(--border);transition:background .15s}
+.ranking-row:last-child{border-bottom:none}
+.ranking-row.me{background:var(--gold-light)}
+.ranking-pos{width:28px;text-align:center;font-size:13px;font-weight:700;color:var(--muted);flex-shrink:0}
+.ranking-pos.top{font-size:18px}
+.ranking-name{flex:1;font-size:15px;font-weight:700;color:var(--text)}
+.ranking-row.me .ranking-name::after{content:' (tú)';font-size:12px;color:var(--gold-dark);font-weight:400}
+.ranking-score{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--slate)}
+.ranking-meta{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
+.ranking-empty{padding:40px 28px;text-align:center;color:var(--muted);font-size:14px;font-weight:300}
 
-/* ── QUIZ ── */
-.quiz-wrap {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-}
-.quiz-inner { padding: 28px 32px; }
-.quiz-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-.quiz-counter { font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--muted); }
-.quiz-score { font-size: 11px; font-weight: 700; color: var(--gold-dark); background: var(--gold-light); border: 1px solid #e0c87a; padding: 3px 12px; border-radius: 100px; }
-.quiz-progress { height: 3px; background: var(--terracotta-light); border-radius: 99px; margin-bottom: 24px; overflow: hidden; }
-.quiz-progress-fill { height: 100%; background: var(--terracotta); border-radius: 99px; transition: width .4s cubic-bezier(.4,0,.2,1); }
-.quiz-q { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: var(--slate); }
-.quiz-options { display: flex; flex-direction: column; gap: 9px; }
-.quiz-opt {
-  display: flex; align-items: center; gap: 12px; padding: 13px 16px;
-  border-radius: 8px; border: 1.5px solid var(--border); background: var(--cream);
-  font-family: 'Lato', sans-serif; font-size: 14px; color: var(--text);
-  cursor: pointer; text-align: left; width: 100%; transition: all .15s; line-height: 1.5;
-}
-.quiz-opt:hover:not(:disabled) { border-color: var(--slate); background: var(--white); }
-.quiz-opt.correct { background: var(--green-light); border-color: var(--green); color: #1e4a32; }
-.quiz-opt.wrong { background: var(--terracotta-light); border-color: var(--terracotta); color: var(--terracotta-dark); }
-.quiz-letter {
-  width: 27px; height: 27px; border-radius: 6px; flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700;
-  background: var(--white); border: 1px solid var(--border); color: var(--muted);
-  transition: all .15s;
-}
-.quiz-opt.correct .quiz-letter { background: var(--green); border-color: var(--green); color: #fff; }
-.quiz-opt.wrong   .quiz-letter { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
-.quiz-next {
-  display: block; width: 100%; padding: 13px; border: none; border-radius: 8px;
-  background: var(--terracotta); color: #fff; font-family: 'Lato', sans-serif;
-  font-size: 14px; font-weight: 700; cursor: pointer; transition: background .15s; margin-top: 16px;
-}
-.quiz-next:hover { background: var(--terracotta-dark); }
-.quiz-end { text-align: center; padding: 40px 16px; animation: scaleIn .4s ease both; }
-.quiz-end-emoji { font-size: 56px; margin-bottom: 8px; }
-.quiz-end-pct { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 800; line-height: 1; }
-.quiz-end-label { font-size: 15px; color: var(--muted); margin-top: 8px; }
-.quiz-end-msg { font-size: 14px; color: var(--muted); margin: 16px auto 28px; max-width: 280px; line-height: 1.65; font-weight: 300; }
-.quiz-restart { display: inline-block; padding: 12px 32px; border: none; border-radius: 8px; background: var(--terracotta); color: #fff; font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .15s; }
-.quiz-restart:hover { background: var(--terracotta-dark); }
+/* WELCOME OVERLAY */
+.welcome-overlay{position:fixed;inset:0;background:rgba(30,42,53,.6);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeUp .3s ease}
+.welcome-card{background:var(--white);border-radius:20px;padding:40px 36px;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.18);text-align:center}
+.welcome-emoji{font-size:52px;margin-bottom:16px}
+.welcome-card h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--slate);margin-bottom:8px}
+.welcome-card p{font-size:14px;color:var(--muted);font-weight:300;line-height:1.7;margin-bottom:28px}
+.welcome-input{width:100%;padding:13px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--cream);color:var(--text);font-size:16px;font-family:'Lato',sans-serif;font-weight:700;outline:none;text-align:center;transition:border-color .15s;margin-bottom:14px}
+.welcome-input:focus{border-color:var(--gold);background:var(--white)}
+.welcome-btn{width:100%;padding:14px;border:none;border-radius:10px;background:var(--gold);color:#fff;font-family:'Lato',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s}
+.welcome-btn:hover{background:var(--gold-dark)}
+.welcome-btn:disabled{opacity:.45;cursor:default}
 
-/* ── FOOTER ── */
-footer {
-  position: relative; z-index: 1; background: var(--white);
-  border-top: 1px solid var(--border); padding: 20px 40px;
-  display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--muted);
-}
-footer strong { color: var(--text); }
+/* FOOTER */
+footer{position:relative;z-index:1;background:var(--white);border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted)}
+footer strong{color:var(--text)}
 
-@media(max-width: 600px) {
-  nav, main, footer { padding-left: 20px; padding-right: 20px; }
-  .tabs-bar { padding: 0 16px; }
-  .theory-body, .calc-inputs, .calc-btn-wrap { padding-left: 16px; padding-right: 16px; }
+@media(max-width:600px){
+  nav,main,footer{padding-left:20px;padding-right:20px}
+  .tabs-bar{padding:0 16px}
 }
-@keyframes fadeUp  { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:translateY(0) } }
-@keyframes scaleIn { from { opacity:0; transform:scale(.96) } to { opacity:1; transform:scale(1) } }
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const {useState} = React;
+const {useState, useEffect} = React;
 
+/* ─── DATA ─── */
 const THEORY=[
   {id:"bases",title:"Bases y Base Reguladora",icon:"📊",content:[
     {t:"sub",v:"¿Qué es la Base de Cotización (BC)?"},
@@ -449,7 +338,7 @@ const THEORY=[
 
 const EXERCISES=[
   {id:"it_comun",title:"IT · Enfermedad Común",icon:"🩺",
-    headBg:"#ddeaf5",headBorder:"#a8c8e8",headText:"#1a4a6e",badgeBg:"rgba(255,255,255,.7)",
+    headBg:"#ddeaf5",headBorder:"#a8c8e8",headText:"#1a4a6e",
     desc:"Calcula paso a paso lo que cobra un trabajador de baja por enfermedad común.",
     inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"dias",label:"Días de baja",def:18,min:1,max:545}],
     solve(v){const br=v.baseCC/30,d=v.dias,d2=Math.max(0,Math.min(d,15)-3),d3=Math.max(0,Math.min(d,20)-15),d4=Math.max(0,d-20),t2=d2*br*.6,t3=d3*br*.6,t4=d4*br*.75,tot=t2+t3+t4;
@@ -457,7 +346,7 @@ const EXERCISES=[
       if(d4>0)s.push({l:`Días 21+ (${d4} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${d4} = ${t4.toFixed(2)} €`,d:"Paga: INSS / Mutua"});
       s.push({l:"Total cobrado",f:`${tot.toFixed(2)} €`,hl:true});return s;}},
   {id:"it_at",title:"IT · Accidente de Trabajo",icon:"⚠️",
-    headBg:"#fceee0",headBorder:"#f0b98a",headText:"#7a3010",badgeBg:"rgba(255,255,255,.7)",
+    headBg:"#fceee0",headBorder:"#f0b98a",headText:"#7a3010",
     desc:"Calcula lo que cobra un trabajador tras un accidente laboral.",
     inputs:[{id:"baseCPP",label:"Base CP mes anterior (€)",def:2100,min:900,max:5000},{id:"he",label:"Horas extra año anterior (€)",def:0,min:0,max:10000},{id:"dias",label:"Días de baja",def:10,min:1,max:545}],
     solve(v){const brB=v.baseCPP/30,brH=v.he/365,br=brB+brH,r=Math.max(0,v.dias-1),resto=r*br*.75;
@@ -465,7 +354,7 @@ const EXERCISES=[
       if(v.he>0)s.push({l:"BR (horas extra)",f:`${v.he} ÷ 365 = ${brH.toFixed(2)} €/día`});
       s.push({l:"BR diaria total",f:`${br.toFixed(2)} €/día`},{l:"Día 1 (baja)",f:`Salario íntegro = ${br.toFixed(2)} €`,d:"Paga: Empresario"},{l:`Días 2-${v.dias} (${r} d.)`,f:`75 % × ${br.toFixed(2)} = ${(br*.75).toFixed(2)} €/día × ${r} = ${resto.toFixed(2)} €`,d:"Paga: Mutua / INSS"},{l:"Total cobrado",f:`${(br+resto).toFixed(2)} €`,hl:true});return s;}},
   {id:"desempleo",title:"Desempleo",icon:"📉",
-    headBg:"#e8e0f0",headBorder:"#b8a0d8",headText:"#3d1f6e",badgeBg:"rgba(255,255,255,.7)",
+    headBg:"#e8e0f0",headBorder:"#b8a0d8",headText:"#3d1f6e",
     desc:"Calcula duración y cuantía de la prestación por desempleo.",
     inputs:[{id:"dc",label:"Días cotizados (últimos 6 años)",def:5110,min:360,max:8000},{id:"bcp",label:"Base CP media mensual (€)",def:2000,min:900,max:5000}],
     solve(v){const t=[[360,539,120],[540,719,180],[720,899,210],[900,1079,240],[1080,1259,300],[1260,1439,330],[1440,1619,360],[1620,1799,420],[1800,1979,480],[1980,2159,540],[2160,1e9,720]];
@@ -475,7 +364,7 @@ const EXERCISES=[
       if(dR>0)s.push({l:`Desde día 181 (${dR} d.)`,f:`50 % × ${v.bcp.toFixed(2)} = ${p2.toFixed(2)} €/mes`});
       s.push({l:"Resumen",f:`${dur} días — 180 d. a ${p1.toFixed(2)} €/mes${dR>0?`, resto a ${p2.toFixed(2)} €/mes`:""}`,hl:true});return s;}},
   {id:"nacimiento",title:"Nacimiento y Cuidado",icon:"👶",
-    headBg:"#ddf0e8",headBorder:"#88ccaa",headText:"#1a4a30",badgeBg:"rgba(255,255,255,.7)",
+    headBg:"#ddf0e8",headBorder:"#88ccaa",headText:"#1a4a30",
     desc:"Calcula la prestación por nacimiento y cuidado del menor.",
     inputs:[{id:"baseCC",label:"Base CC mes anterior (€)",def:1800,min:900,max:5000},{id:"edad",label:"Edad del progenitor/a",def:30,min:16,max:65},{id:"dc7",label:"Días cotizados últimos 7 años",def:2100,min:0,max:6000},{id:"dcT",label:"Días cotizados totales",def:2100,min:0,max:15000}],
     solve(v){const br=v.baseCC/30;let ok=false,txt="";
@@ -485,24 +374,43 @@ const EXERCISES=[
       return [{l:"Carencia",f:`${txt} → ${ok?"Cumple ✓":"No cumple ✗"}`},{l:"BR diaria",f:`${v.baseCC} ÷ 30 = ${br.toFixed(2)} €/día`},{l:"Cuantía",f:`100 % BR = ${br.toFixed(2)} €/día ≈ ${v.baseCC.toFixed(2)} €/mes`},{l:"Duración",f:"16 semanas (6 obligatorias + 10 flexibles)"},{l:"Total estimado",f:`${br.toFixed(2)} × 112 días = ${(br*112).toFixed(2)} €`,hl:true}];}},
 ];
 
+/* Quiz questions with explanations */
 const QUIZ=[
-  {q:"La Seguridad Social se financia principalmente con:",o:["Solo impuestos del Estado","Cotizaciones + aportaciones del Estado","Donaciones y loterías","Solo cotizaciones del trabajador"],c:1},
-  {q:"Un técnico de radioterapia en hospital público pertenece al:",o:["RETA","Régimen especial sanitario","Régimen General","Régimen de funcionarios"],c:2},
-  {q:"¿Qué entidad gestiona el desempleo?",o:["INSS","TGSS","SEPE","INSST"],c:2},
-  {q:"Si tienes gripe, los 3 primeros días cobras:",o:["60 % de la BR","75 % de la BR","Nada (0 %)","100 % del salario"],c:2},
-  {q:"La prestación por nacimiento dura:",o:["12 semanas","16 semanas","20 semanas","6 meses"],c:1},
-  {q:"Embarazada no reubicable cobra:",o:["75 % de la BR","Nada hasta el parto","100 % BR por contingencias profesionales","60 % de la BR"],c:2},
-  {q:"Para cobrar desempleo se exigen al menos:",o:["180 d. en últimos 5 años","360 d. en últimos 6 años","12 meses en últimos 3 años","No se exige"],c:1},
-  {q:"El MEI en 2026 es del:",o:["0,50 %","0,70 %","0,90 %","1,20 %"],c:2},
-  {q:"Edad general de jubilación en 2026:",o:["65 años","66 años y 8 meses","67 años","64 años y 6 meses"],c:1},
-  {q:"Si dimites, ¿tienes derecho a desempleo?",o:["Sí, si cotizaste suficiente","Sí, pero solo el 50 %","No, no es situación legal de desempleo","Sí, pero solo subsidio"],c:2},
-  {q:"¿Entre qué días se cobra al 60 % en IT por enfermedad común?",o:["Del 1 al 15","Del 4 al 20","Del 4 al 15","Del 1 al 20"],c:1},
-  {q:"En IT por AT/EP, desde el día siguiente se cobra:",o:["60 %","75 %","100 %","Nada"],c:1},
-  {q:"La IP Total supone una pensión del:",o:["100 % de la BR","55 % BR (75 % si ≥ 55 sin empleo)","24 mensualidades","80 % de la BR"],c:1},
-  {q:"Cotización mínima para jubilarse:",o:["10 años","15 años","20 años","25 años"],c:1},
-  {q:"La capitalización del desempleo requiere al menos:",o:["1 mes pendiente","3 meses pendientes","6 meses pendientes","12 meses pendientes"],c:1},
+  {q:"La Seguridad Social se financia principalmente con:",o:["Solo impuestos del Estado","Cotizaciones + aportaciones del Estado","Donaciones y loterías","Solo cotizaciones del trabajador"],c:1,
+    exp:"El sistema es contributivo: se financia sobre todo con las cotizaciones de empresas y trabajadores, complementadas con aportaciones del Estado para prestaciones no contributivas."},
+  {q:"Un técnico de radioterapia en hospital público pertenece al:",o:["RETA","Régimen especial sanitario","Régimen General","Régimen de funcionarios"],c:2,
+    exp:"Los trabajadores por cuenta ajena en hospitales (incluidos los sanitarios) pertenecen al Régimen General, que es el régimen 'estándar' para asalariados."},
+  {q:"¿Qué entidad gestiona el desempleo?",o:["INSS","TGSS","SEPE","INSST"],c:2,
+    exp:"El SEPE (Servicio Público de Empleo Estatal) gestiona las prestaciones por desempleo y la formación. El INSS gestiona otras prestaciones como jubilación o IT."},
+  {q:"Si tienes gripe, los 3 primeros días cobras:",o:["60 % de la BR","75 % de la BR","Nada (0 %)","100 % del salario"],c:2,
+    exp:"En IT por enfermedad común, los días 1 a 3 son un período de espera sin prestación. Nadie paga esos días — ni el empresario ni la Seguridad Social."},
+  {q:"La prestación por nacimiento dura:",o:["12 semanas","16 semanas","20 semanas","6 meses"],c:1,
+    exp:"Son 16 semanas por progenitor, individuales e intransferibles. Las 6 primeras son obligatorias e ininterrumpidas tras el parto."},
+  {q:"Embarazada no reubicable cobra:",o:["75 % de la BR","Nada hasta el parto","100 % BR por contingencias profesionales","60 % de la BR"],c:2,
+    exp:"Si la empresa no puede reubicarla en un puesto compatible con su embarazo, pasa a suspensión del contrato por riesgo durante el embarazo y cobra el 100 % de la BR, con cargo a contingencias profesionales."},
+  {q:"Para cobrar desempleo se exigen al menos:",o:["180 d. en últimos 5 años","360 d. en últimos 6 años","12 meses en últimos 3 años","No se exige"],c:1,
+    exp:"El período mínimo de cotización para acceder a la prestación contributiva por desempleo es de 360 días dentro de los 6 años anteriores al desempleo."},
+  {q:"El MEI en 2026 es del:",o:["0,50 %","0,70 %","0,90 %","1,20 %"],c:2,
+    exp:"El Mecanismo de Equidad Intergeneracional (MEI) es del 0,90 % en 2026 (0,75 % empresa + 0,15 % trabajador). Se creó para reforzar el Fondo de Reserva de la SS."},
+  {q:"Edad general de jubilación en 2026:",o:["65 años","66 años y 8 meses","67 años","64 años y 6 meses"],c:1,
+    exp:"En 2026 la edad ordinaria es 66 años y 8 meses. Se puede jubilar a los 65 años si se tienen ≥ 38 años y 3 meses cotizados. La edad llegará a 67 en 2027."},
+  {q:"Si dimites, ¿tienes derecho a desempleo?",o:["Sí, si cotizaste suficiente","Sí, pero solo el 50 %","No, no es situación legal de desempleo","Sí, pero solo subsidio"],c:2,
+    exp:"La dimisión voluntaria no es una situación legal de desempleo. Para cobrar el paro hay que perder el trabajo de forma involuntaria (despido, fin de contrato, etc.)."},
+  {q:"¿Entre qué días se cobra al 60 % en IT por enfermedad común?",o:["Del 1 al 15","Del 4 al 20","Del 4 al 15","Del 1 al 20"],c:1,
+    exp:"Del día 4 al 15 paga el empresario el 60 % de la BR. Del 16 al 20 lo paga el INSS/Mutua también al 60 %. A partir del día 21 sube al 75 %."},
+  {q:"En IT por AT/EP, desde el día siguiente se cobra:",o:["60 %","75 %","100 %","Nada"],c:1,
+    exp:"En accidente de trabajo, el día de la baja se cobra el salario íntegro (lo paga el empresario). Desde el día siguiente en adelante se cobra el 75 % de la BR, a cargo de la Mutua o el INSS."},
+  {q:"La IP Total supone una pensión del:",o:["100 % de la BR","55 % BR (75 % si ≥ 55 sin empleo)","24 mensualidades","80 % de la BR"],c:1,
+    exp:"La IP Total impide ejercer la profesión habitual y da derecho al 55 % de la BR. Puede subir al 75 % si el trabajador tiene 55 o más años y dificultades para encontrar empleo."},
+  {q:"Cotización mínima para jubilarse:",o:["10 años","15 años","20 años","25 años"],c:1,
+    exp:"Se necesitan al menos 15 años cotizados para acceder a la jubilación contributiva, de los cuales 2 deben estar dentro de los últimos 15 años antes de jubilarse."},
+  {q:"La capitalización del desempleo requiere al menos:",o:["1 mes pendiente","3 meses pendientes","6 meses pendientes","12 meses pendientes"],c:1,
+    exp:"Para cobrar el paro en un pago único (capitalización) hay que tener pendientes al menos 3 meses de prestación, no haberla capitalizado en los últimos 4 años, y destinarlo a crear una actividad como autónomo."},
 ];
 
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw9EgX6WTKAhT03XpzWeKhBwyv4GsRhTz_JinYoCW7k2mRrWTq3awK0pS_uXnUeKjzUWQ/exec";
+
+/* ─── COMPONENTS ─── */
 function Block({section}){
   return React.createElement("div",null,section.content.map((b,i)=>{
     if(b.t==="text")    return React.createElement("p",{key:i,className:"block-text"},b.v);
@@ -526,8 +434,7 @@ function Calc({ex}){
       React.createElement("span",{className:"calc-icon"},ex.icon),
       React.createElement("div",{style:{flex:1}},
         React.createElement("div",{className:"calc-head-title",style:{color:ex.headText}},ex.title),
-        React.createElement("div",{className:"calc-head-desc",style:{color:ex.headText,opacity:.7}},ex.desc)),
-      ),
+        React.createElement("div",{className:"calc-head-desc",style:{color:ex.headText}},ex.desc))),
     React.createElement("div",{className:"calc-inputs"},
       ex.inputs.map(inp=>React.createElement("label",{key:inp.id},
         React.createElement("span",{className:"calc-label"},inp.label),
@@ -541,15 +448,34 @@ function Calc({ex}){
         s.d&&React.createElement("div",{className:"step-note"},s.d)))));
 }
 
-function Quiz(){
+/* ── Quiz ── */
+function Quiz({nick}){
   const [qs]=useState(()=>QUIZ.slice().sort(()=>Math.random()-.5));
   const [cur,setCur]=useState(0);
   const [sel,setSel]=useState(null);
   const [show,setShow]=useState(false);
   const [score,setScore]=useState(0);
+  const [startMs]=useState(Date.now());
+  const [saved,setSaved]=useState(false);
+  const [showRanking,setShowRanking]=useState(false);
+
   const pick=i=>{if(show)return;setSel(i);setShow(true);if(i===qs[cur].c)setScore(s=>s+1);};
   const next=()=>{setSel(null);setShow(false);setCur(c=>c+1);};
-  const restart=()=>{setCur(0);setSel(null);setShow(false);setScore(0);};
+  const restart=()=>{setSel(null);setShow(false);setCur(0);setScore(0);setSaved(false);setShowRanking(false);};
+
+  // Save score to shared storage when quiz ends
+  useEffect(()=>{
+    if(cur>=qs.length&&!saved&&nick){
+      const elapsed=Math.round((Date.now()-startMs)/1000);
+      const pts=Math.round((score/qs.length)*1000 - elapsed*0.5);
+      const entry={nick,score,total:qs.length,pts:Math.max(pts,0),ts:Date.now()};
+      fetch(SHEET_URL,{method:"POST",body:JSON.stringify(entry)})
+        .finally(()=>setSaved(true));
+    }
+  },[cur,saved]);
+
+  if(showRanking) return React.createElement(Ranking,{nick,onBack:()=>setShowRanking(false),onRestart:restart});
+
   if(cur>=qs.length){
     const pct=Math.round(score/qs.length*100);
     const clr=pct>=70?"var(--green)":pct>=50?"var(--gold)":"var(--terracotta)";
@@ -557,9 +483,12 @@ function Quiz(){
       React.createElement("div",{className:"quiz-end-emoji"},pct>=70?"🎉":pct>=50?"💪":"📚"),
       React.createElement("div",{className:"quiz-end-pct",style:{color:clr}},pct+"%"),
       React.createElement("div",{className:"quiz-end-label"},`${score} de ${qs.length} correctas`),
-      React.createElement("p",{className:"quiz-end-msg"},pct>=70?"¡Excelente! Dominas el tema.":pct>=50?"Buen intento. Repasa los que fallaste.":"Necesitas repasar. ¡Ánimo!"),
-      React.createElement("button",{className:"quiz-restart",onClick:restart},"Repetir test"));
+      React.createElement("p",{className:"quiz-end-msg"},pct>=70?"¡Excelente! Dominas el tema.":pct>=50?"Buen intento. Repasa los que fallaste.":"Necesitas repasar más. ¡Ánimo!"),
+      React.createElement("div",{className:"quiz-end-btns"},
+        React.createElement("button",{className:"quiz-restart",onClick:restart},"Repetir test"),
+        React.createElement("button",{className:"quiz-ranking-btn",onClick:()=>setShowRanking(true)},"🏆 Ver clasificación")));
   }
+
   const q=qs[cur];
   return React.createElement("div",null,
     React.createElement("div",{className:"quiz-meta"},
@@ -573,50 +502,99 @@ function Quiz(){
         const cls=show?(i===q.c?"quiz-opt correct":i===sel?"quiz-opt wrong":"quiz-opt"):"quiz-opt";
         return React.createElement("button",{key:i,className:cls,onClick:()=>pick(i),disabled:show},
           React.createElement("span",{className:"quiz-letter"},show&&i===q.c?"✓":show&&i===sel?"✗":["A","B","C","D"][i]),opt);})),
+    show&&React.createElement("div",{className:`quiz-feedback ${sel===q.c?"ok":"ko"}`},
+      React.createElement("strong",null,sel===q.c?"✓ Correcto — ":"✗ Incorrecto — "),q.exp),
     show&&React.createElement("button",{className:"quiz-next",onClick:next},cur+1<qs.length?"Siguiente →":"Ver resultado"));
 }
 
-const TABS=[
-  {id:"teoria",  label:"Teoría",       emoji:"📖"},
-  {id:"calc",    label:"Calculadora",  emoji:"🧮"},
-  {id:"quiz",    label:"Test",         emoji:"✅"},
-];
+/* ── Ranking ── */
+function Ranking({nick,onBack,onRestart}){
+  const [rows,setRows]=useState(null);
+  const load=async()=>{
+    setRows(null);
+    try{
+      const res=await fetch(SHEET_URL);
+      const data=await res.json();
+      setRows(data);
+    }catch(e){setRows([]);}
+  };
+  useEffect(()=>{load();},[]);
 
+  const medals=["🥇","🥈","🥉"];
+  return React.createElement("div",{className:"ranking-wrap"},
+    React.createElement("div",{className:"ranking-head"},
+      React.createElement("div",null,
+        React.createElement("h3",null,"🏆 Clasificación"),
+        React.createElement("p",null,"Mejores puntuaciones de la clase")),
+      React.createElement("button",{className:"ranking-refresh",onClick:load},"↻ Actualizar")),
+    rows===null
+      ? React.createElement("div",{className:"ranking-empty"},"Cargando…")
+      : rows.length===0
+        ? React.createElement("div",{className:"ranking-empty"},"Todavía no hay puntuaciones. ¡Sé el primero!")
+        : React.createElement("div",{className:"ranking-list"},
+            rows.map((r,i)=>React.createElement("div",{key:r.nick,className:`ranking-row${r.nick===nick?" me":""}`},
+              React.createElement("span",{className:`ranking-pos${i<3?" top":""}`},i<3?medals[i]:i+1),
+              React.createElement("span",{className:"ranking-name"},r.nick),
+              React.createElement("div",{className:"ranking-score"},r.pts),
+              React.createElement("div",{className:"ranking-meta"},`${r.score}/${r.total} aciertos`)))),
+    React.createElement("div",{style:{padding:"16px 28px",borderTop:"1px solid var(--border)",display:"flex",gap:10}},
+      React.createElement("button",{className:"quiz-ranking-btn",style:{flex:1},onClick:onBack},"← Volver al test"),
+      React.createElement("button",{className:"quiz-restart",style:{flex:1},onClick:onRestart},"Repetir test")));
+}
+
+/* ── Welcome ── */
+function Welcome({onEnter}){
+  const [val,setVal]=useState("");
+  const clean=val.trim();
+  return React.createElement("div",{className:"welcome-overlay"},
+    React.createElement("div",{className:"welcome-card"},
+      React.createElement("div",{className:"welcome-emoji"},"👋"),
+      React.createElement("h2",null,"¡Bienvenido/a!"),
+      React.createElement("p",null,"Elige un apodo para identificarte en la clasificación del test. Solo lo verán tus compañeros/as de clase."),
+      React.createElement("input",{className:"welcome-input",placeholder:"Tu apodo…",maxLength:20,value:val,onChange:e=>setVal(e.target.value),onKeyDown:e=>{if(e.key==="Enter"&&clean)onEnter(clean);},autoFocus:true}),
+      React.createElement("button",{className:"welcome-btn",disabled:!clean,onClick:()=>onEnter(clean)},"Entrar →")));
+}
+
+/* ── App ── */
+const TABS=[
+  {id:"teoria",   label:"Teoría",       emoji:"📖"},
+  {id:"calc",     label:"Calculadora",  emoji:"🧮"},
+  {id:"quiz",     label:"Test",         emoji:"✅"},
+  {id:"ranking",  label:"Clasificación",emoji:"🏆"},
+];
 const TAB_TITLES={
-  teoria:  {h:"La Seguridad Social",     em:"Teoría",       sub:"Selecciona una sección para empezar a estudiar."},
-  calc:    {h:"Calculadora de",          em:"Prestaciones", sub:"Modifica los valores y pulsa «Calcular» para ver la solución paso a paso."},
-  quiz:    {h:"Test de",                 em:"Autoevaluación",sub:"15 preguntas en orden aleatorio. ¿Cuánto sabes?"},
+  teoria:  {h:"La Seguridad",  em:"Social",        sub:"Selecciona una sección para estudiar el temario."},
+  calc:    {h:"Calculadora de",em:"Prestaciones",  sub:"Modifica los valores y pulsa «Calcular» para ver la solución paso a paso."},
+  quiz:    {h:"Test de",       em:"Autoevaluación",sub:"15 preguntas en orden aleatorio. ¡Consigue la mejor puntuación!"},
+  ranking: {h:"Tabla de",      em:"Clasificación", sub:"Las mejores puntuaciones de la clase."},
 };
 
 function App(){
+  const [nick,setNick]=useState(null);
   const [tab,setTab]=useState("teoria");
   const [sec,setSec]=useState("bases");
   const cur=THEORY.find(s=>s.id===sec);
   const tt=TAB_TITLES[tab];
 
   return React.createElement(React.Fragment,null,
-    /* NAV */
-    React.createElement("nav",null,
-      React.createElement("div",{className:"nav-brand"},
-        React.createElement("span",{className:"nav-dot"}),
-        "IPE I · Seguridad Social"),
-      React.createElement("span",{className:"nav-tag"},"Curso 2025–2026")),
+    !nick&&React.createElement(Welcome,{onEnter:setNick}),
 
-    /* TABS */
+    React.createElement("nav",null,
+      React.createElement("div",{className:"nav-brand"},React.createElement("span",{className:"nav-dot"}),"IPE I · Seguridad Social"),
+      React.createElement("div",{className:"nav-right"},
+        nick&&React.createElement("span",{className:"nav-nick",title:"Haz clic para cambiar de apodo",onClick:()=>setNick(null)},"👤 "+nick),
+        React.createElement("span",{className:"nav-tag"},"Curso 2025–2026"))),
+
     React.createElement("div",{className:"tabs-bar"},
       TABS.map(t=>React.createElement("button",{key:t.id,
         className:`tab-btn${tab===t.id?" active":""}`,
         onClick:()=>setTab(t.id)},t.emoji," ",t.label))),
 
-    /* MAIN */
     React.createElement("main",null,
-
-      /* per-tab title — replaces the big hero */
       React.createElement("div",{key:tab,className:"section-header",style:{animation:"fadeUp .3s ease both"}},
         React.createElement("h2",null,tt.h," ",React.createElement("em",null,tt.em)),
         React.createElement("p",null,tt.sub)),
 
-      /* TEORÍA */
       tab==="teoria"&&React.createElement(React.Fragment,null,
         React.createElement("div",{className:"eyebrow"},"Secciones"),
         React.createElement("div",{className:"pills"},
@@ -631,16 +609,15 @@ function App(){
               React.createElement("div",{className:"unit-tag"},"Seguridad Social · 2026"))),
           React.createElement("div",{className:"theory-body"},React.createElement(Block,{section:cur})))),
 
-      /* CALCULADORA */
       tab==="calc"&&React.createElement("div",null,
         EXERCISES.map(ex=>React.createElement(Calc,{key:ex.id,ex:ex}))),
 
-      /* TEST */
       tab==="quiz"&&React.createElement("div",{className:"quiz-wrap"},
         React.createElement("div",{className:"quiz-inner"},
-          React.createElement(Quiz,null)))),
+          React.createElement(Quiz,{nick}))),
 
-    /* FOOTER */
+      tab==="ranking"&&React.createElement(Ranking,{nick,onBack:()=>setTab("quiz"),onRestart:()=>setTab("quiz")})),
+
     React.createElement("footer",null,
       React.createElement("div",null,React.createElement("strong",null,"IPE I")," · Seguridad Social"),
       React.createElement("div",null,"Curso 2025–2026")));

@@ -21,7 +21,6 @@
 body{font-family:'Lato',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
 body::before{content:'';position:fixed;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 24px,rgba(0,0,0,0.018) 24px,rgba(0,0,0,0.018) 25px);pointer-events:none;z-index:0}
 
-/* NAV */
 nav{position:relative;z-index:10;background:var(--white);border-bottom:1px solid var(--border);padding:16px 40px;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--slate);display:flex;align-items:center;gap:10px}
 .nav-dot{width:9px;height:9px;border-radius:50%;background:var(--gold)}
@@ -30,13 +29,11 @@ nav{position:relative;z-index:10;background:var(--white);border-bottom:1px solid
 .nav-nick{font-size:12px;font-weight:700;color:var(--gold-dark);border:1px solid #e0c87a;padding:4px 14px;border-radius:100px;background:var(--gold-light);cursor:pointer;transition:all .15s}
 .nav-nick:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
 
-/* TABS */
 .tabs-bar{position:sticky;top:0;z-index:20;background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;display:flex;gap:0;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
 .tab-btn{font-family:'Lato',sans-serif;font-size:14px;font-weight:700;padding:15px 22px;border:none;background:transparent;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;display:flex;align-items:center;gap:7px}
 .tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
 .tab-btn:hover:not(.active){color:var(--text)}
 
-/* MAIN */
 main{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:48px 40px 100px;animation:fadeUp .4s ease both}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--terracotta);display:flex;align-items:center;gap:12px;margin-bottom:28px}
 .eyebrow::after{content:'';flex:1;height:1px;background:var(--border)}
@@ -45,13 +42,11 @@ main{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:48px 40px
 .section-header h2 em{font-style:italic;color:var(--gold)}
 .section-header p{font-size:15px;color:var(--muted);font-weight:300;line-height:1.7;max-width:520px}
 
-/* PILLS */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
 .pill{font-family:'Lato',sans-serif;font-size:13px;font-weight:700;padding:7px 16px;border-radius:100px;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
 .pill.active{background:var(--gold);border-color:var(--gold);color:#fff}
 .pill:hover:not(.active){border-color:var(--slate);color:var(--text)}
 
-/* THEORY CARD */
 .theory-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .3s ease both}
 .theory-card-head{display:flex;align-items:center;gap:16px;padding:24px 28px;border-bottom:1px solid var(--border);background:var(--slate)}
 .theory-icon{font-size:28px}
@@ -70,7 +65,6 @@ tbody td{padding:12px 18px;border-bottom:1px solid var(--border);line-height:1.5
 tbody tr:last-child td{border-bottom:none}
 tbody tr:nth-child(even) td{background:var(--cream)}
 
-/* CALC */
 .calc-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;box-shadow:0 4px 16px rgba(45,63,80,0.07),0 1px 3px rgba(45,63,80,0.05)}
 .calc-head{padding:22px 26px;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border)}
 .calc-icon{font-size:26px;flex-shrink:0;line-height:1}
@@ -91,7 +85,6 @@ tbody tr:nth-child(even) td{background:var(--cream)}
 .step-val{font-size:14px;font-weight:700;color:var(--text);line-height:1.6}
 .step-note{font-size:12px;color:var(--muted);margin-top:4px}
 
-/* QUIZ */
 .quiz-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .quiz-inner{padding:28px 32px}
 .quiz-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -108,13 +101,10 @@ tbody tr:nth-child(even) td{background:var(--cream)}
 .quiz-letter{width:27px;height:27px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:var(--white);border:1px solid var(--border);color:var(--muted);transition:all .15s}
 .quiz-opt.correct .quiz-letter{background:var(--green);border-color:var(--green);color:#fff}
 .quiz-opt.wrong .quiz-letter{background:var(--terracotta);border-color:var(--terracotta);color:#fff}
-
-/* feedback box */
 .quiz-feedback{margin-top:14px;padding:13px 16px;border-radius:8px;font-size:14px;line-height:1.65;animation:fadeUp .25s ease both}
 .quiz-feedback.ok{background:var(--green-light);border:1px solid #a8d5be;color:#1e4a32}
 .quiz-feedback.ko{background:var(--terracotta-light);border:1px solid #d4a090;color:var(--terracotta-dark)}
 .quiz-feedback strong{font-weight:700}
-
 .quiz-next{display:block;width:100%;padding:13px;border:none;border-radius:8px;background:var(--terracotta);color:#fff;font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:16px}
 .quiz-next:hover{background:var(--terracotta-dark)}
 .quiz-end{text-align:center;padding:40px 16px;animation:scaleIn .4s ease both}
@@ -128,7 +118,6 @@ tbody tr:nth-child(even) td{background:var(--cream)}
 .quiz-ranking-btn{padding:12px 28px;border:1.5px solid var(--gold);border-radius:8px;background:transparent;color:var(--gold-dark);font-family:'Lato',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s}
 .quiz-ranking-btn:hover{background:var(--gold);color:#fff}
 
-/* RANKING */
 .ranking-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .ranking-head{padding:22px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .ranking-head h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--slate)}
@@ -147,7 +136,6 @@ tbody tr:nth-child(even) td{background:var(--cream)}
 .ranking-meta{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
 .ranking-empty{padding:40px 28px;text-align:center;color:var(--muted);font-size:14px;font-weight:300}
 
-/* WELCOME — inline dentro del quiz-wrap */
 .welcome-overlay{display:flex;align-items:center;justify-content:center;padding:40px 16px;animation:fadeUp .3s ease}
 .welcome-card{text-align:center;max-width:380px;width:100%}
 .welcome-emoji{font-size:52px;margin-bottom:16px}
@@ -159,7 +147,6 @@ tbody tr:nth-child(even) td{background:var(--cream)}
 .welcome-btn:hover{background:var(--gold-dark)}
 .welcome-btn:disabled{opacity:.45;cursor:default}
 
-/* FOOTER */
 footer{position:relative;z-index:1;background:var(--white);border-top:1px solid var(--border);padding:20px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--muted)}
 footer strong{color:var(--text)}
 
@@ -176,7 +163,6 @@ footer strong{color:var(--text)}
 <script type="text/babel">
 const {useState, useEffect} = React;
 
-/* ─── DATA ─── */
 const THEORY=[
   {id:"bases",title:"Bases y Base Reguladora",icon:"📊",content:[
     {t:"sub",v:"¿Qué es la Base de Cotización (BC)?"},
@@ -320,10 +306,10 @@ const THEORY=[
   {id:"desempleo",title:"Desempleo",icon:"📉",content:[
     {t:"sub",v:"Requisitos"},
     {t:"text",v:"Afiliado y en alta. ≥ 360 días cotizados en últimos 6 años. No haber alcanzado edad de jubilación. Situación legal de desempleo (NO dimisión)."},
-    {t:"sub",v:"Cuantía"},
+    {t:"sub",v:"Cuantía (art. 270 LGSS)"},
     {t:"table",h:["Período","Cuantía"],r:[
       ["Primeros 180 días","70 % de la BR"],
-      ["Desde el día 181","50 % de la BR"],
+      ["Desde el día 181","60 % de la BR"],
     ]},
     {t:"formula",v:"BR = Suma bases CP últimos 180 días ÷ 180"},
     {t:"sub",v:"Duración según cotización"},
@@ -398,7 +384,7 @@ const EXERCISES=[
   },
   {id:"desempleo",title:"Desempleo",icon:"📉",
     headBg:"#e8e0f0",headBorder:"#b8a0d8",headText:"#3d1f6e",
-    desc:"Calcula duración y cuantía de la prestación contributiva por desempleo.",
+    desc:"Calcula duración y cuantía de la prestación contributiva por desempleo (art. 270 LGSS).",
     inputs:[
       {id:"dc",label:"Días cotizados (últimos 6 años)",def:720,min:0,max:2190},
       {id:"bcp",label:"Base CP media mensual (€)",def:2000,min:0,max:5000},
@@ -409,15 +395,16 @@ const EXERCISES=[
       const tabla=[[360,539,120],[540,719,180],[720,899,210],[900,1079,240],[1080,1259,300],[1260,1439,330],[1440,1619,360],[1620,1799,420],[1800,1979,480],[1980,2159,540],[2160,2190,720]];
       let dur=0;
       for(const [a,b,d] of tabla){if(v.dc>=a&&v.dc<=b){dur=d;break;}}
-      if(!dur) dur=720; // ≥ 2160
-      const p1=v.bcp*.7, p2=v.bcp*.5, dR=Math.max(0,dur-180);
+      if(!dur) dur=720;
+      // Art. 270 LGSS: 70% primeros 180 días, 60% desde el día 181
+      const p1=v.bcp*.7, p2=v.bcp*.6, dR=Math.max(0,dur-180);
       const s=[
         {l:"Carencia",f:`${v.dc} días cotizados ≥ 360 → Tiene derecho ✓`},
         {l:"Duración",f:`${v.dc} días cotizados → ${dur} días de prestación`},
         {l:"Base reguladora",f:`≈ ${v.bcp.toFixed(2)} €/mes`},
-        {l:"Primeros 180 días",f:`70 % × ${v.bcp.toFixed(2)} = ${p1.toFixed(2)} €/mes`},
+        {l:"Primeros 180 días — 70 %",f:`70 % × ${v.bcp.toFixed(2)} = ${p1.toFixed(2)} €/mes`},
       ];
-      if(dR>0) s.push({l:`Desde día 181 (${dR} d. restantes)`,f:`50 % × ${v.bcp.toFixed(2)} = ${p2.toFixed(2)} €/mes`});
+      if(dR>0) s.push({l:`Desde día 181 — 60 % (${dR} d. restantes)`,f:`60 % × ${v.bcp.toFixed(2)} = ${p2.toFixed(2)} €/mes`});
       s.push({l:"Resumen",f:`${dur} días — primeros 180 d. a ${p1.toFixed(2)} €/mes${dR>0?`, resto a ${p2.toFixed(2)} €/mes`:""}`,hl:true});
       return s;
     }
@@ -458,7 +445,6 @@ const EXERCISES=[
   },
 ];
 
-/* Quiz questions with explanations */
 const QUIZ=[
   {q:"La Seguridad Social se financia principalmente con:",o:["Solo impuestos del Estado","Cotizaciones + aportaciones del Estado","Donaciones y loterías","Solo cotizaciones del trabajador"],c:1,
     exp:"El sistema es contributivo: se financia sobre todo con las cotizaciones de empresas y trabajadores, complementadas con aportaciones del Estado para prestaciones no contributivas."},
@@ -488,13 +474,12 @@ const QUIZ=[
     exp:"La IP Total impide ejercer la profesión habitual y da derecho al 55 % de la BR. Puede subir al 75 % si el trabajador tiene 55 o más años y dificultades para encontrar empleo."},
   {q:"Cotización mínima para jubilarse:",o:["10 años","15 años","20 años","25 años"],c:1,
     exp:"Se necesitan al menos 15 años cotizados para acceder a la jubilación contributiva, de los cuales 2 deben estar dentro de los últimos 15 años antes de jubilarse."},
-  {q:"La capitalización del desempleo requiere al menos:",o:["1 mes pendiente","3 meses pendientes","6 meses pendientes","12 meses pendientes"],c:1,
-    exp:"Para cobrar el paro en un pago único (capitalización) hay que tener pendientes al menos 3 meses de prestación, no haberla capitalizado en los últimos 4 años, y destinarlo a crear una actividad como autónomo."},
+  {q:"¿Cuánto se cobra a partir del día 181 en la prestación por desempleo?",o:["50 % de la BR","60 % de la BR","70 % de la BR","75 % de la BR"],c:1,
+    exp:"Según el art. 270 LGSS, la prestación contributiva por desempleo es del 70 % los primeros 180 días y del 60 % a partir del día 181. El 50 % quedó derogado con la reforma."},
 ];
 
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbw9EgX6WTKAhT03XpzWeKhBwyv4GsRhTz_JinYoCW7k2mRrWTq3awK0pS_uXnUeKjzUWQ/exec";
 
-/* ─── COMPONENTS ─── */
 function Block({section}){
   return React.createElement("div",null,section.content.map((b,i)=>{
     if(b.t==="text")    return React.createElement("p",{key:i,className:"block-text"},b.v);
@@ -532,7 +517,6 @@ function Calc({ex}){
         s.d&&React.createElement("div",{className:"step-note"},s.d)))));
 }
 
-/* ── Quiz ── */
 function Quiz({nick}){
   const [qs]=useState(()=>QUIZ.slice().sort(()=>Math.random()-.5));
   const [cur,setCur]=useState(0);
@@ -547,14 +531,12 @@ function Quiz({nick}){
   const next=()=>{setSel(null);setShow(false);setCur(c=>c+1);};
   const restart=()=>{setSel(null);setShow(false);setCur(0);setScore(0);setSaved(false);setShowRanking(false);};
 
-  // Save score to shared storage when quiz ends
   useEffect(()=>{
     if(cur>=qs.length&&!saved&&nick){
       const elapsed=Math.round((Date.now()-startMs)/1000);
       const pts=Math.round((score/qs.length)*1000 - elapsed*0.5);
       const entry={nick,score,total:qs.length,pts:Math.max(pts,0),ts:Date.now()};
-      fetch(SHEET_URL,{method:"POST",body:JSON.stringify(entry)})
-        .finally(()=>setSaved(true));
+      fetch(SHEET_URL,{method:"POST",body:JSON.stringify(entry)}).finally(()=>setSaved(true));
     }
   },[cur,saved]);
 
@@ -591,19 +573,14 @@ function Quiz({nick}){
     show&&React.createElement("button",{className:"quiz-next",onClick:next},cur+1<qs.length?"Siguiente →":"Ver resultado"));
 }
 
-/* ── Ranking ── */
 function Ranking({nick,onBack,onRestart}){
   const [rows,setRows]=useState(null);
   const load=async()=>{
     setRows(null);
-    try{
-      const res=await fetch(SHEET_URL);
-      const data=await res.json();
-      setRows(data);
-    }catch(e){setRows([]);}
+    try{const res=await fetch(SHEET_URL);const data=await res.json();setRows(data);}
+    catch(e){setRows([]);}
   };
   useEffect(()=>{load();},[]);
-
   const medals=["🥇","🥈","🥉"];
   return React.createElement("div",{className:"ranking-wrap"},
     React.createElement("div",{className:"ranking-head"},
@@ -626,7 +603,6 @@ function Ranking({nick,onBack,onRestart}){
       React.createElement("button",{className:"quiz-restart",style:{flex:1},onClick:onRestart},"Repetir test")));
 }
 
-/* ── Welcome ── */
 function Welcome({onEnter}){
   const [val,setVal]=useState("");
   const clean=val.trim();
@@ -639,7 +615,6 @@ function Welcome({onEnter}){
       React.createElement("button",{className:"welcome-btn",disabled:!clean,onClick:()=>onEnter(clean)},"Entrar →")));
 }
 
-/* ── App ── */
 const TABS=[
   {id:"teoria",   label:"Teoría",       emoji:"📖"},
   {id:"calc",     label:"Calculadora",  emoji:"🧮"},

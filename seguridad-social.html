@@ -634,7 +634,7 @@ function Welcome({onEnter}){
     React.createElement("div",{className:"welcome-card"},
       React.createElement("div",{className:"welcome-emoji"},"👋"),
       React.createElement("h2",null,"¡Bienvenido/a!"),
-      React.createElement("p",null,"Elige un apodo para identificarte en la clasificación del test. Solo lo verán tus compañeros/as de clase."),
+      React.createElement("p",null,"Elige un apodo para identificarte en la clasificación del test."),
       React.createElement("input",{className:"welcome-input",placeholder:"Tu apodo…",maxLength:20,value:val,onChange:e=>setVal(e.target.value),onKeyDown:e=>{if(e.key==="Enter"&&clean)onEnter(clean);},autoFocus:true}),
       React.createElement("button",{className:"welcome-btn",disabled:!clean,onClick:()=>onEnter(clean)},"Entrar →")));
 }
